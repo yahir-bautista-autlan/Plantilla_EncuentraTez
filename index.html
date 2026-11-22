@@ -168,6 +168,18 @@ select.input{appearance:none;-webkit-appearance:none;background-image:url("data:
 .pick.err{border-color:var(--orange);color:var(--orange)}
 .pick img{width:100%;height:100%;border-radius:58px;object-fit:cover}
 .pick .edit{position:absolute;right:0;bottom:2px;width:36px;height:36px;border-radius:18px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid #fff}
+.auth-split{min-height:100dvh;display:flex;flex-direction:column;background:#fff}
+.auth-brand{background:var(--accent);color:#fff;padding:calc(var(--sat) + 24px) 24px 24px;display:flex;flex-direction:column;gap:18px}
+.logo-w{width:36px;height:36px;border-radius:10px;background:#fff;color:var(--accent);display:flex;align-items:center;justify-content:center}
+.auth-copy h1{font-size:27px;line-height:33px;font-weight:700;letter-spacing:-.02em}
+.auth-copy p{margin-top:10px;font-size:15px;line-height:22px;color:#CCFBF1}
+.auth-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.auth-cards div{background:#115E59;border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.auth-cards b{font-size:14px}.auth-cards span{font-size:12.5px;line-height:17px;color:#CCFBF1}
+.auth-form{flex:1;padding:28px 24px calc(var(--sab) + 28px);display:flex;justify-content:center}
+.auth-form .inner{width:100%;max-width:400px;display:flex;flex-direction:column;gap:18px}
+.input.bad{border-color:var(--orange)}
+.req{color:var(--orange);margin-left:2px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* ---------- Desktop ---------- */
@@ -198,6 +210,12 @@ select.input{appearance:none;-webkit-appearance:none;background-image:url("data:
   .toast{bottom:32px}
   .sheet{left:auto;right:20px;bottom:20px;width:420px;border-radius:20px;max-height:80dvh}
   .hero-auth{justify-content:center}
+  .auth-split{flex-direction:row}
+  .auth-brand{flex:1;padding:56px;justify-content:space-between;min-height:100dvh}
+  .auth-copy h1{font-size:44px;line-height:52px;max-width:480px}
+  .auth-copy p{font-size:17px;line-height:26px;max-width:460px}
+  .auth-cards div{padding:18px}
+  .auth-form{align-items:center}
 }
 </style>
 </head>
@@ -259,6 +277,9 @@ const PROVS = {
   mari:{n:'Cocina Doña Mari',i:'CD',c:'c5',o:'Comida casera',d:'Menú del día y pedidos para eventos',r:'4.9',rv:120,km:'0.8 km',when:'Abierto',v:true},
   rosa:{n:'Rosa Hernández',i:'RH',c:'c4',o:'Electricista',d:'Contactos, centros de carga, iluminación',r:'4.7',rv:38,km:'1.9 km',when:'Mañana',v:true}
 };
+const SERVS = ['Visita de diagnóstico','Reparación de fuga','Instalación de calentador','Otro trabajo'];
+const SV = () => SERVS[S.servicio];
+const OTRO = () => S.servicio === 3;
 const CATS = [['Plomería','drop'],['Electricidad','bolt'],['Albañilería','brick'],['Carpintería','saw'],['Limpieza','spark'],['Comida','food'],['Pintura','paint'],['Mudanzas','box']];
 
 /* ---------------- Estado ---------------- */
@@ -269,7 +290,7 @@ const S = {
   terminado:false, rating:0, reservasTab:'activas', agendaDia:2, filtros:{hoy:true},
   chat:[{me:false,t:'¡Hola! Ya vi la foto. ¿La llave de paso está cerrada?'},{me:true,t:'Sí, ya la cerré. Gracias.'},{me:false,t:'Perfecto, llego a las 4:10.'}],
   ine:{frente:false,reverso:false,selfie:false}, reporte:0, cot:[['Visita de diagnóstico','$[PRECIO]'],['Cambio de tubo flexible','$[PRECIO]']],
-  _from:'registro', foto:null
+  _from:'registro', foto:null, email:'', cotLista:false
 };
 try{ const saved = JSON.parse(localStorage.getItem('proto-state')||'null'); if(saved){ S.mode=saved.mode; S.ofrecerActivo=saved.ofrecerActivo; S.pasos=saved.pasos; } }catch(e){}
 function persist(){ try{ localStorage.setItem('proto-state', JSON.stringify({mode:S.mode,ofrecerActivo:S.ofrecerActivo,pasos:S.pasos})); }catch(e){} }
@@ -280,9 +301,18 @@ function pickFoto(inp){ const f = inp.files && inp.files[0]; if(!f) return; cons
 function fotoDemo(){ const c=document.createElement('canvas'); c.width=c.height=240; const x=c.getContext('2d'); x.fillStyle='#DBEAFE'; x.fillRect(0,0,240,240); x.fillStyle='#93C5FD'; x.beginPath(); x.arc(120,95,48,0,7); x.fill(); x.beginPath(); x.ellipse(120,235,88,80,0,0,7); x.fill(); S.foto=c.toDataURL(); render(); toast('Foto de ejemplo agregada'); }
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function toast(t){ const el=document.getElementById('toast'); el.textContent=t; el.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('show'),2200); }
-function go(id){ location.hash = '#/' + id; }
-function back(fallback){ if(history.length > 1 && go._n > 0){ go._n--; history.back(); } else go(fallback || home()); }
-go._n = 0;
+/* Navegación con pila propia: no depende del historial del navegador (iOS en pantalla de inicio no lo tiene) */
+const NAV = { stack: [], last: null, backing: false };
+const PARENT = { registro:'bienvenida', codigo:'registro', elegir:'bienvenida', resultados:'buscar', proveedor:'resultados', solicitar:'proveedor', cotizacion:'proveedor', pago:'solicitar', seguimiento:'reservas', calificar:'seguimiento', reporte:'seguimiento', reservas:'buscar', chat:'mensajes', ayuda:'cuenta', 'paso-servicio':'activar', 'paso-ine':'activar', 'paso-rfc':'activar', 'paso-clabe':'activar', solicitud:'ofrecer', cotizar:'solicitud', agenda:'ofrecer', trabajo:'agenda', pagos:'ofrecer', 'perfil-publico':'ofrecer' };
+function go(id){ if(curId() === id){ render(); return; } location.hash = '#/' + id; }
+function back(){
+  const cur = curId();
+  let prev = NAV.stack.pop();
+  while(prev === cur) prev = NAV.stack.pop();
+  if(!prev) prev = PARENT[cur] || (cur === 'activar' ? 'buscar' : home());
+  NAV.backing = true;
+  location.hash = '#/' + prev;
+}
 function home(){ return S.mode === 'ofrecer' && S.ofrecerActivo ? 'ofrecer' : 'buscar'; }
 function setMode(m){
   if(m === 'ofrecer' && !S.ofrecerActivo){ go('activar'); return; }
@@ -306,31 +336,27 @@ const sec = (title, inner, action='') => `<section class="stack"><div class="bet
 /* tipo de barra superior: 'home' | 'back' | 'none'; tabs: 'buscar' | 'ofrecer' | null */
 const SCREENS = {
 /* ===== Acceso ===== */
-bienvenida:{g:'Acceso', t:'Bienvenida', bar:'none', tabs:null, r:()=>`
-  <div class="hero-auth">
-    <div class="logo">${I('logo',32,2.2)}</div>
-    <div><p style="font-weight:650;color:var(--accent);margin-bottom:8px">[Tu marca]</p>
-    <h1 class="h1" style="font-size:32px;line-height:38px">Encuentra quién te ayude o gana dinero ayudando</h1>
-    <p class="sub" style="margin-top:12px">Una sola cuenta para contratar servicios cerca de ti y para ofrecer los tuyos.</p></div>
-    <div class="stack">
-      <div class="banner">${I('search',20)}<span><b>Busca</b> plomeros, electricistas, comida casera y más, con pago protegido.</span></div>
-      <div class="banner o">${I('tool',20)}<span><b>Ofrece</b> tu oficio o negocio y cobra directo a tu cuenta.</span></div>
-    </div>
-    <div class="stack" style="margin-top:auto">
-      <button class="btn" onclick="S._from='registro';go('registro')">Crear cuenta</button>
-      <button class="btn ghost" onclick="S._from='login';go('login')">Ya tengo cuenta</button>
-    </div>
-  </div>`},
-login:{g:'Acceso', t:'Iniciar sesión', bar:'back', tabs:null, r:()=>`
-  <div class="narrow stack" style="gap:20px">
-    <div><h1 class="h1">Inicia sesión</h1><p class="sub" style="margin-top:6px">Te enviaremos un código por WhatsApp o SMS.</p></div>
-    <div class="field"><label for="tel">Número de celular</label>
-      <div class="row" style="gap:8px"><span class="input" style="width:auto;display:flex;align-items:center;font-weight:500">+52</span><input id="tel" class="input" type="tel" inputmode="tel" placeholder="55 1234 5678"></div></div>
-    <button class="btn" onclick="go('codigo')">Continuar</button>
-    <div class="row small" style="gap:12px"><span style="flex:1;height:1px;background:var(--line)"></span>o<span style="flex:1;height:1px;background:var(--line)"></span></div>
-    <button class="btn ghost" onclick="go('elegir')">Continuar con Google</button>
-    <button class="btn ghost" onclick="go('elegir')">Continuar con Apple</button>
-    <p class="small" style="text-align:center">¿Primera vez? <a href="#/registro">Crea tu cuenta</a></p>
+bienvenida:{g:'Acceso', t:'Iniciar sesión', bar:'none', tabs:null, r:()=>`
+  <div class="auth-split">
+    <section class="auth-brand">
+      <div class="row" style="gap:10px;font-weight:700;font-size:16px"><span class="logo-w">${I('logo',20,2.4)}</span>[Tu marca]</div>
+      <div class="auth-copy"><h1>Encuentra quién te ayude o gana dinero ayudando</h1>
+        <p>Una sola cuenta para contratar servicios cerca de ti y para ofrecer los tuyos.</p></div>
+      <div class="auth-cards">
+        <div><b>Busco un servicio</b><span>Proveedores verificados y pago protegido.</span></div>
+        <div><b>Ofrezco un servicio</b><span>Recibe solicitudes y cobra a tu cuenta.</span></div>
+      </div>
+    </section>
+    <section class="auth-form"><div class="inner">
+      <div><h2 class="h1">Inicia sesión</h2><p class="sub" style="margin-top:6px;font-size:14px">¿Primera vez? <a href="#/registro" style="font-weight:650;text-decoration:none">Crea tu cuenta</a></p></div>
+      <div class="field"><label for="tel">Número de celular</label>
+        <div class="row" style="gap:8px"><span class="input" style="width:auto;display:flex;align-items:center;font-weight:500">+52</span><input id="tel" class="input" type="tel" inputmode="tel" placeholder="55 1234 5678"></div>
+        <p class="small" style="margin-top:6px;font-size:12px">Te enviaremos un código por WhatsApp o SMS.</p></div>
+      <button class="btn" onclick="go('codigo')">Continuar</button>
+      <div class="row small" style="gap:12px"><span style="flex:1;height:1px;background:var(--line)"></span>o<span style="flex:1;height:1px;background:var(--line)"></span></div>
+      <div class="btns"><button class="btn ghost" onclick="go('elegir')">Google</button><button class="btn ghost" onclick="go('elegir')">Apple</button></div>
+      <p class="small" style="font-size:12px">Al continuar aceptas los <a href="#/bienvenida">Términos</a> y el <a href="#/bienvenida">Aviso de privacidad</a>.</p>
+    </div></section>
   </div>`},
 registro:{g:'Acceso', t:'Crear cuenta', bar:'back', tabs:null, r:()=>`
   <div class="narrow stack" style="gap:18px">
@@ -348,10 +374,10 @@ registro:{g:'Acceso', t:'Crear cuenta', bar:'back', tabs:null, r:()=>`
     </div>
     <div class="field"><label for="nom">Nombre completo</label><input id="nom" class="input" value="Javier Ramírez"></div>
     <div class="field"><label for="cel">Número de celular</label><input id="cel" class="input" type="tel" value="+52 55 1234 5678"></div>
-    <div class="field"><label for="mail">Correo (opcional)</label><input id="mail" class="input" type="email" placeholder="tu@correo.com"></div>
+    <div class="field"><label for="mail">Correo electrónico<span class="req" aria-hidden="true">*</span></label><input id="mail" class="input" type="email" inputmode="email" autocomplete="email" required aria-required="true" aria-describedby="mailhelp" placeholder="tu@correo.com" value="${esc(S.email)}" oninput="S.email=this.value;checkReg()"><p id="mailhelp" class="small" style="margin-top:6px;font-size:12px">Obligatorio. Lo usamos para tus recibos, facturas y para recuperar tu cuenta.</p></div>
     <label class="row small" style="align-items:flex-start;gap:10px;color:var(--ink2)"><input type="checkbox" checked style="width:20px;height:20px;accent-color:var(--accent);margin:0"><span>Acepto los <a href="#/registro">Términos y condiciones</a> y el <a href="#/registro">Aviso de privacidad</a>.</span></label>
-    <button class="btn" ${S.foto?'':'disabled'} onclick="go('codigo')">Enviar código</button>
-    ${S.foto?'':'<p class="small" style="text-align:center;color:var(--orange);margin-top:-8px">Agrega tu foto de perfil para continuar</p>'}
+    <button class="btn" id="regbtn" disabled onclick="go('codigo')">Enviar código</button>
+    <p class="small" id="reghelp" style="text-align:center;color:var(--orange);margin-top:-8px"></p>
   </div>`},
 codigo:{g:'Acceso', t:'Verificar celular', bar:'back', tabs:null, r:()=>`
   <div class="narrow stack" style="gap:20px">
@@ -399,33 +425,55 @@ proveedor:{g:'Buscar', t:'Perfil del proveedor', bar:'back', tabs:'buscar', tab:
     <div class="grid3">${[[p.r,p.rv+' reseñas'],['140','trabajos'],['~20 min','en responder']].map(([a,b])=>`<div style="background:var(--bg);border-radius:12px;padding:10px;text-align:center"><b style="font-size:17px">${a}</b><div class="small" style="font-size:12px">${b}</div></div>`).join('')}</div>
     <p style="font-size:15px;line-height:22px;color:var(--ink2)">${p.d}. Atiendo en Roma, Condesa y Juárez. Llevo material básico.</p>
   </div>
-  ${sec('Servicios y precios', `<div class="stack" style="gap:8px">${['Visita de diagnóstico','Reparación de fuga','Instalación de calentador'].map((s,i)=>`<button class="opt ${S.servicio===i?'on':''}" onclick="set('servicio',${i})"><span class="radio"></span><span style="flex:1">${s}</span><b>${i?'desde ':''}$[PRECIO]</b></button>`).join('')}</div>`)}
+  ${sec('¿Qué necesitas?', `<div class="stack" style="gap:8px">${SERVS.slice(0,3).map((s,i)=>`<button class="opt ${S.servicio===i?'on':''}" onclick="set('servicio',${i})"><span class="radio"></span><span style="flex:1">${s}</span><b>${i?'desde ':''}$[PRECIO]</b></button>`).join('')}
+    <button class="opt ${OTRO()?'on':''}" onclick="set('servicio',3)"><span class="radio"></span><span style="flex:1"><span style="display:block">Otro trabajo</span><span class="small" style="font-weight:400">Describe lo que necesitas y ${p.n.split(' ')[0]} te envía una cotización</span></span><span class="tag o">Cotización</span></button>
+    <p class="small">¿No sabes qué elegir? La visita de diagnóstico revisa el problema y te cotiza ahí mismo.</p></div>`)}
   </div><div class="b">
   ${sec('Trabajos recientes', `<div class="grid3">${[1,2,3].map(()=>`<div class="photo">Foto</div>`).join('')}</div>`)}
   ${sec('Reseñas', `<div class="stack">${[['Ana G.','hace 3 días','Llegó a tiempo, explicó el problema y dejó todo limpio.'],['Carlos P.','hace 2 semanas','Muy profesional. El precio fue el que cotizó.']].map(([a,b,c])=>`<div class="card stack" style="gap:6px"><div class="between small"><b style="color:var(--ink)">${a}</b><span>${STAR(12)}${STAR(12)}${STAR(12)}${STAR(12)}${STAR(12)} · ${b}</span></div><p style="font-size:14px;line-height:20px;color:var(--ink2)">${c}</p></div>`).join('')}</div>`)}
   </div></div>
-  <div class="sticky-cta"><div class="btns"><button class="btn sec" onclick="go('chat')">Mensaje</button><button class="btn" onclick="go('solicitar')">Solicitar servicio</button></div></div>
+  <div class="sticky-cta"><div class="btns"><button class="btn sec" onclick="go('chat')">Mensaje</button><button class="btn" onclick="go('solicitar')">${OTRO()?'Pedir cotización':'Solicitar servicio'}</button></div></div>
 `}},
-solicitar:{g:'Buscar', t:'Solicitar servicio', bar:'back', tabs:null, r:()=>`
+solicitar:{g:'Buscar', t:'Solicitar servicio', bar:'back', tabs:null, title:()=>OTRO()?'Pedir cotización':'Solicitar servicio', r:()=>`
   <div class="narrow stack" style="gap:18px">
-  <div class="row"><span class="av sm ${PROVS[S.prov].c}">${PROVS[S.prov].i}</span><div><b>${PROVS[S.prov].n}</b><div class="small">${['Visita de diagnóstico','Reparación de fuga','Instalación de calentador'][S.servicio]}</div></div></div>
-  <div class="field"><label for="desc">Describe el problema</label><textarea id="desc" class="input">Gotea el tubo debajo del lavabo del baño. Ya cerré la llave de paso.</textarea></div>
+  <div class="row"><span class="av sm ${PROVS[S.prov].c}">${PROVS[S.prov].i}</span><div><b>${PROVS[S.prov].n}</b><div class="small">${SV()}</div></div></div>
+  ${OTRO()?`<div class="banner o">${I('doc',20)}<span>${PROVS[S.prov].n.split(' ')[0]} revisará tu solicitud y te enviará un precio. <b>No pagas nada hasta que aceptes la cotización.</b></span></div>`:''}
+  <div class="field"><label for="desc">${OTRO()?'Describe el trabajo que necesitas':'Describe el problema'}${OTRO()?'<span class="req">*</span>':''}</label><textarea id="desc" class="input" ${OTRO()?'placeholder="Ej. Quiero mover la regadera a la otra pared y cambiar la llave mezcladora."':''}>${OTRO()?'':'Gotea el tubo debajo del lavabo del baño. Ya cerré la llave de paso.'}</textarea>${OTRO()?'<p class="small" style="margin-top:6px;font-size:12px">Entre más detalle y fotos, más exacta será la cotización.</p>':''}</div>
   <button class="upload" onclick="this.classList.add('ok');this.innerHTML='${I('check',22,2.4).replace(/"/g,'&quot;')} 2 fotos agregadas'">${I('camera',26,1.8)}Agregar fotos (opcional)</button>
-  <div><span class="lbl">¿Cuándo?</span><div class="chips">${['Hoy','Mañana','Sáb 28','Dom 29','Otra fecha'].map(d=>`<button class="chip ${S.dia===d?'on':''}" onclick="set('dia','${d}')">${d}</button>`).join('')}</div></div>
+  <div><span class="lbl">${OTRO()?'¿Cuándo te gustaría?':'¿Cuándo?'}</span><div class="chips">${['Hoy','Mañana','Sáb 28','Dom 29','Otra fecha'].map(d=>`<button class="chip ${S.dia===d?'on':''}" onclick="set('dia','${d}')">${d}</button>`).join('')}</div></div>
   <div><span class="lbl">Horario de llegada</span><div class="slots">${['9:00 am','11:00 am','1:00 pm','4:00 pm','5:30 pm','7:00 pm'].map(h=>`<button class="chip ${S.hora===h?'on':''}" style="height:44px" onclick="set('hora','${h}')">${h}</button>`).join('')}</div></div>
   <div class="field"><label for="dir">Dirección</label><div class="search">${I('pin',20)}<input id="dir" value="Calle [DIRECCIÓN], Roma Norte"></div></div>
-  <button class="btn" onclick="go('pago')">Continuar al pago</button>
+  ${OTRO()?`<button class="btn o" onclick="S.cotLista=false;NAV.stack=['proveedor'];go('cotizacion')">Enviar solicitud de cotización</button>`:`<button class="btn" onclick="go('pago')">Continuar al pago</button>`}
   </div>`},
+cotizacion:{g:'Buscar', t:'Tu cotización', bar:'back', tabs:null, r:()=>{ const p=PROVS[S.prov]; return `
+  <div class="narrow stack" style="gap:16px">
+  <div class="card row"><span class="av ${p.c}">${p.i}</span><div style="flex:1"><b>${p.n}</b><div class="small">${p.o} · ${STAR(12)} ${p.r}</div></div><button class="iconbtn ring" aria-label="Mensaje" onclick="go('chat')" style="color:var(--accent)">${I('chat',20,1.8)}</button></div>
+  ${S.cotLista ? `
+    <div><span class="tag">Cotización recibida</span><h1 class="h1" style="margin-top:8px">Mover regadera y cambiar mezcladora</h1><p class="sub" style="margin-top:4px">Válida por 24 horas</p></div>
+    <div class="list">${[['Mano de obra','$[PRECIO]'],['Tubería y conexiones','$[PRECIO]'],['Llave mezcladora','$[PRECIO]']].map(([a,b])=>`<div class="li" style="cursor:default"><span class="grow">${a}</span><b>${b}</b></div>`).join('')}</div>
+    <div class="card sum"><div><span class="small" style="font-size:15px">Subtotal</span><span>$[PRECIO]</span></div><div><span class="small" style="font-size:15px">Tarifa de servicio</span><span>$[TARIFA]</span></div><div class="t"><span>Total</span><span>$[TOTAL]</span></div></div>
+    <div class="card"><p style="font-size:15px;line-height:22px;color:var(--ink2)">“Incluye material. Me toma un día. Garantía de 30 días.”</p><div class="small" style="margin-top:8px">Propone: Sáb 28, 9:00 am</div></div>
+    <button class="btn" onclick="go('pago')">Aceptar y pagar</button>
+    <div class="btns"><button class="btn ghost" onclick="go('chat')">Pedir un cambio</button><button class="btn ghost" onclick="toast('Cotización rechazada');go('buscar')">Rechazar</button></div>
+  ` : `
+    <div style="text-align:center" class="stack"><span style="width:72px;height:72px;border-radius:36px;background:var(--orange-t);color:var(--orange);display:flex;align-items:center;justify-content:center;margin:0 auto">${I('doc',34,1.8)}</span>
+      <h1 class="h1">Solicitud enviada</h1><p class="sub">${p.n.split(' ')[0]} suele responder en ~20 min. Te avisaremos cuando llegue tu cotización.</p></div>
+    <div class="card stack" style="gap:6px"><b>Lo que pediste</b><p class="small" style="color:var(--ink2)">Mover la regadera a la otra pared y cambiar la llave mezcladora.</p><p class="small">Te gustaría: ${S.dia}, ${S.hora}</p></div>
+    <div class="banner">${I('shield',20)}<span>No pagas nada hasta que aceptes la cotización.</span></div>
+    <button class="btn ghost sm" onclick="set('cotLista',true);toast('Llegó tu cotización')">Simular: llegó la cotización</button>
+    <button class="btn link" onclick="toast('Puedes pedir a otros proveedores mientras esperas');go('resultados')">Pedir también a otros proveedores</button>
+  `}
+  </div>`}},
 pago:{g:'Buscar', t:'Pago', bar:'back', tabs:null, r:()=>`
   <div class="narrow stack" style="gap:18px">
-  <div class="card stack" style="gap:8px"><div class="between"><b>Tu solicitud</b><a href="#/solicitar" style="font-size:14px;text-decoration:none;font-weight:600">Editar</a></div>
+  <div class="card stack" style="gap:8px"><div class="between"><b>${OTRO()?'Trabajo cotizado':'Tu solicitud'}</b><a href="#/${OTRO()?'cotizacion':'solicitar'}" style="font-size:14px;text-decoration:none;font-weight:600">Editar</a></div>
     <div class="row small" style="color:var(--ink2)">${I('cal',18,1.8)}${S.dia}, ${S.hora}</div><div class="row small" style="color:var(--ink2)">${I('pin',18,1.8)}Calle [DIRECCIÓN], Roma Norte</div></div>
   <div><span class="lbl">Método de pago</span><div class="stack" style="gap:8px">
     ${[['tarjeta','Tarjeta de crédito o débito','•••• 4821'],['oxxo','Efectivo en OXXO','Paga antes de la cita'],['spei','Transferencia SPEI','']].map(([k,a,b])=>`<button class="opt ${S.pago===k?'on':''}" onclick="set('pago','${k}')"><span class="radio"></span><span style="flex:1">${a}</span><span class="small">${b}</span></button>`).join('')}
     <button class="btn link" onclick="toast('Agregar tarjeta')">${I('plus',18)} Agregar tarjeta</button></div></div>
-  <div class="card sum"><div><span class="small" style="font-size:15px">${['Visita de diagnóstico','Reparación de fuga','Instalación de calentador'][S.servicio]}</span><span>$[PRECIO]</span></div><div><span class="small" style="font-size:15px">Tarifa de servicio</span><span>$[TARIFA]</span></div><div class="t"><span>Total</span><span>$[TOTAL]</span></div></div>
+  <div class="card sum"><div><span class="small" style="font-size:15px">${OTRO()?'Cotización aceptada':SV()}</span><span>$[PRECIO]</span></div><div><span class="small" style="font-size:15px">Tarifa de servicio</span><span>$[TARIFA]</span></div><div class="t"><span>Total</span><span>$[TOTAL]</span></div></div>
   <div class="banner">${I('shield',20)}<span>Retenemos tu pago y lo liberamos al proveedor cuando confirmes el trabajo. Cancelación gratis hasta 2 horas antes.</span></div>
-  <button class="btn" onclick="go('pago-ok')">Pagar $[TOTAL]</button>
+  <button class="btn" onclick="NAV.stack=['buscar'];go('pago-ok')">Pagar $[TOTAL]</button>
   </div>`},
 'pago-ok':{g:'Buscar', t:'Pago confirmado', bar:'none', tabs:null, r:()=>`
   <div class="hero-auth" style="justify-content:center;text-align:center;align-items:center">
@@ -433,7 +481,7 @@ pago:{g:'Buscar', t:'Pago', bar:'back', tabs:null, r:()=>`
     <h1 class="h1">¡Solicitud enviada!</h1>
     <p class="sub">${PROVS[S.prov].n} tiene 15 minutos para confirmar. Tu pago está protegido hasta que confirmes el trabajo.</p>
     <div class="card" style="width:100%;text-align:left"><div class="between"><span class="small">Folio</span><b>#[FOLIO]</b></div><div class="between" style="margin-top:8px"><span class="small">Cuándo</span><b>${S.dia}, ${S.hora}</b></div></div>
-    <div class="stack" style="width:100%;margin-top:12px"><button class="btn" onclick="go('seguimiento')">Ver seguimiento</button><button class="btn link" onclick="go('buscar')">Volver al inicio</button></div>
+    <div class="stack" style="width:100%;margin-top:12px"><button class="btn" onclick="NAV.stack=['buscar'];go('seguimiento')">Ver seguimiento</button><button class="btn link" onclick="NAV.stack=[];go('buscar')">Volver al inicio</button></div>
   </div>`},
 seguimiento:{g:'Buscar', t:'Seguimiento', bar:'back', tabs:'buscar', tab:1, r:()=>{ const p=PROVS[S.prov]; const T=S.terminado; return `
   <div class="two"><div class="a">
@@ -660,10 +708,27 @@ function render(){
   document.title = (sc.title ? (sc.title()||sc.t) : sc.t) + ' · Prototipo';
   const mb = document.getElementById('mapbtn'); if(mb) mb.style.display = auth ? 'flex' : 'none';
   if(id === 'chat'){ window.scrollTo(0, document.body.scrollHeight); }
+  if(id === 'registro') checkReg();
 }
-window.addEventListener('hashchange', () => { go._n++; window.scrollTo(0,0); render(); });
+window.addEventListener('hashchange', () => {
+  const id = curId();
+  if(NAV.backing){ NAV.backing = false; }
+  else if(NAV.stack.length && NAV.stack[NAV.stack.length-1] === id){ NAV.stack.pop(); } /* gesto atrás del navegador */
+  else if(NAV.last && NAV.last !== id){ NAV.stack.push(NAV.last); if(NAV.stack.length > 60) NAV.stack.shift(); }
+  NAV.last = id; window.scrollTo(0,0); render();
+});
 
 /* ---------------- Interacciones ---------------- */
+function checkReg(){
+  const b = document.getElementById('regbtn'); if(!b) return;
+  const okMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(S.email.trim());
+  const miss = [];
+  if(!S.foto) miss.push('tu foto de perfil');
+  if(!okMail) miss.push(S.email.trim() ? 'un correo válido' : 'tu correo');
+  b.disabled = miss.length > 0;
+  document.getElementById('reghelp').textContent = miss.length ? 'Agrega ' + miss.join(' y ') + ' para continuar' : '';
+  const m = document.getElementById('mail'); if(m) m.classList.toggle('bad', !!S.email.trim() && !okMail);
+}
 function otpNext(el, i){ el.value = el.value.replace(/\D/g,''); if(el.value && i < 5) el.parentNode.children[i+1].focus(); if(i===5 && el.value) setTimeout(()=>go('elegir'), 250); }
 function sendMsg(){ const inp = document.getElementById('cm'); const t = inp.value.trim(); if(!t) return; S.chat.push({me:true,t}); render(); setTimeout(()=>{ S.chat.push({me:false,t:'¡Entendido!'}); if(curId()==='chat') render(); }, 900); }
 
@@ -679,6 +744,7 @@ function openMap(){
   document.getElementById('sheet').classList.add('show'); document.getElementById('sheetbg').classList.add('show');
 }
 function closeMap(){ document.getElementById('sheet').classList.remove('show'); document.getElementById('sheetbg').classList.remove('show'); }
+NAV.last = curId();
 document.body.insertAdjacentHTML('beforeend', `<button id="mapbtn" class="map-btn" onclick="openMap()" aria-label="Mapa de pantallas">${I('grid',16,2)}Pantallas</button>`);
 render();
 </script>
