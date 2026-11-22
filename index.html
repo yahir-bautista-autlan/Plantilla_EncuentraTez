@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Tu marca">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAFVklEQVR4Xu3bQZLTMBCF4Qw1ezgp7OAMs+SmHIGFq1ypJHb0Wi11t/x/K2oqtmXp+clh4OP775834JVvTAuOEA4QDuhoDtAc0NEcoDmgozlAc0BHc4DmgI7mAM0BHc0BmgM6mgM0B3Q0B2gO6GgO0BzQ0RygOaCjOUBzQEdzgOaAjuYAzQEdzQGaAzqaAzQHdDQHaA7oaA7QHNDRHKA5oPvUD1nEv6+/L+/kx59fi9xhtwuF4ygNOLJ+OMiE2bLhIBP9FgwHsfCyVDiIha9FwkEsRigfDmIxTu2/ISUZQ1VtDmIxQcnmIBlz1AsHyZim0rZCLCYr0xwkY74azTEoGfwC9lyBcPgmg0C0yx4Or2SQCYPU4XBJBrEwSx2OTsSiU95w9NQGsXCR9KssycggY3OYk0Fh+EraHAYkw126cNhqg2SMkCscJCOVXOEwoDPGSRQOQ23kT4bhpvJIFA5VlWTUzUeWcKgzWCUZG/XuksgSjsU8p6FiPlKEQ5245LVxdDvqbYZLEQ5J0WRU3F/iw1HueTrRci8tn0kiPhySzLXRvurtn4xVLBxpqeutfj5EcDikOUpbG9Jd7GxHzRQcjgWY1zht1ndlwpF/KiUlbicyHOZnLg/bLZRIxu0WGo7q1k5GmXAkfNSWT0aZcGRzhWQQDouLJCMyHLYpDmcbdsJtsUXkt5VGeWb2UsmIbI5yrpYMwtHKlozqCmwr4czJyLMh2qwTDvMSnjOftnoy1tlWtiU0L+QR8wkXSMbtlvI/Uqvul/Df11+vhZmQjPZLeN2UpPy28jy/7TN+wnySkFUcpHY4jpbQvLQb8+ErJaP2O8f5EpoX2HzgYskoHI6WJWz5zAPDIZv1klE1HO1L2P5JdpNn9d45pPVuX3L1tLslO2NTIBwP31QNb+ZvF/7tB470JMN80WnCwmGbVttR7f0hMQ9GNe1CD8LCYWaeKd/vveZhFFIvHD1fDbz+xuwKyajxzvFyUzAvT/8bjPnS9/K/cJQJx0vmRer5LZ35ohVFbiv9E20+g+3BNV+uR8hFy3yV3Rwt57S5c7yQLZrzRTaHF8dlOzLhEgkFh0Oa9JMHTjqPyvfkUm34XloVHA5HsfO4pGLhOH/sRuTD95xSbYSLD4fv7Gc+m8r3Xgziw6F6+/B5zanXeXZvR55NinCoy/B2ltUTPus/w4O3Y37gPgCDFOEYoWdye45dSZZwqOvR8iCq59zYjjrXMtp7I8ZgkCUcBi0zfjTL6s97tIwzp0ThMDwuLfP+fNrtJ0c/99UywoRvG5tE4bBpmf37HLT82UvL2DLLFQ5DeTT+E8DztrBd1/c9YzNiJGYf33//NB88iO2BSzWtC9zCCtvKzrYeI+QZSaeMzdG4UxwJrJCeWAQO+0iud45dz0z1rFCPnuv23O84SZtj0zPdM1/uqoxT9akeUMi2ZkMfys5YJJe6OfrLw2WfeskrFkOz2yl7OBzzselcDK9MuAxmtALhcM+HWie+gVCvHqhGOMblI0pngc2R9KvssxKz2ajKvZRpjt2gkp+jSiw2ZZqj0FZ9pFYySoaj/xtHiHLJuN0Kbiv3SmwxFWNRdVu5l3/e84/wRL0X0pcSVkjpWGwWCccmSUQWiMWC4QiPyDKxWDYcIRFZLBaLh2M3dK9ZMhO7pd45zjmmZO1MXDEcD6SsXCQNDy7UHFDV+90KpiEcOEQ4QDigozlAc0BHc4DmgI7mAM0BHc0BmgM6mgM0B3Q0B2gO6GgO0BzQ0RygOaCjOUBzQEdzgOaAjuYAzQEdzQGaAzqaAzQHdDQHaA7oaA7QHNDRHKA5oKM5QHNA9x9AQtAQCKSvsgAAAABJRU5ErkJggg==">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAFVklEQVR4Xu3bQZLTMBCF4Qw1ezgp7OAMs+SmHIGFq1ypJHb0Wi11t/x/K2oqtmXp+clh4OP775834JVvTAuOEA4QDuhoDtAc0NEcoDmgozlAc0BHc4DmgI7mAM0BHc0BmgM6mgM0B3Q0B2gO6GgO0BzQ0RygOaCjOUBzQEdzgOaAjuYAzQEdzQGaAzqaAzQHdDQHaA7oaA7QHNDRHKA5oPvUD1nEv6+/L+/kx59fi9xhtwuF4ygNOLJ+OMiE2bLhIBP9FgwHsfCyVDiIha9FwkEsRigfDmIxTu2/ISUZQ1VtDmIxQcnmIBlz1AsHyZim0rZCLCYr0xwkY74azTEoGfwC9lyBcPgmg0C0yx4Or2SQCYPU4XBJBrEwSx2OTsSiU95w9NQGsXCR9KssycggY3OYk0Fh+EraHAYkw126cNhqg2SMkCscJCOVXOEwoDPGSRQOQ23kT4bhpvJIFA5VlWTUzUeWcKgzWCUZG/XuksgSjsU8p6FiPlKEQ5245LVxdDvqbYZLEQ5J0WRU3F/iw1HueTrRci8tn0kiPhySzLXRvurtn4xVLBxpqeutfj5EcDikOUpbG9Jd7GxHzRQcjgWY1zht1ndlwpF/KiUlbicyHOZnLg/bLZRIxu0WGo7q1k5GmXAkfNSWT0aZcGRzhWQQDouLJCMyHLYpDmcbdsJtsUXkt5VGeWb2UsmIbI5yrpYMwtHKlozqCmwr4czJyLMh2qwTDvMSnjOftnoy1tlWtiU0L+QR8wkXSMbtlvI/Uqvul/Df11+vhZmQjPZLeN2UpPy28jy/7TN+wnySkFUcpHY4jpbQvLQb8+ErJaP2O8f5EpoX2HzgYskoHI6WJWz5zAPDIZv1klE1HO1L2P5JdpNn9d45pPVuX3L1tLslO2NTIBwP31QNb+ZvF/7tB470JMN80WnCwmGbVttR7f0hMQ9GNe1CD8LCYWaeKd/vveZhFFIvHD1fDbz+xuwKyajxzvFyUzAvT/8bjPnS9/K/cJQJx0vmRer5LZ35ohVFbiv9E20+g+3BNV+uR8hFy3yV3Rwt57S5c7yQLZrzRTaHF8dlOzLhEgkFh0Oa9JMHTjqPyvfkUm34XloVHA5HsfO4pGLhOH/sRuTD95xSbYSLD4fv7Gc+m8r3Xgziw6F6+/B5zanXeXZvR55NinCoy/B2ltUTPus/w4O3Y37gPgCDFOEYoWdye45dSZZwqOvR8iCq59zYjjrXMtp7I8ZgkCUcBi0zfjTL6s97tIwzp0ThMDwuLfP+fNrtJ0c/99UywoRvG5tE4bBpmf37HLT82UvL2DLLFQ5DeTT+E8DztrBd1/c9YzNiJGYf33//NB88iO2BSzWtC9zCCtvKzrYeI+QZSaeMzdG4UxwJrJCeWAQO+0iud45dz0z1rFCPnuv23O84SZtj0zPdM1/uqoxT9akeUMi2ZkMfys5YJJe6OfrLw2WfeskrFkOz2yl7OBzzselcDK9MuAxmtALhcM+HWie+gVCvHqhGOMblI0pngc2R9KvssxKz2ajKvZRpjt2gkp+jSiw2ZZqj0FZ9pFYySoaj/xtHiHLJuN0Kbiv3SmwxFWNRdVu5l3/e84/wRL0X0pcSVkjpWGwWCccmSUQWiMWC4QiPyDKxWDYcIRFZLBaLh2M3dK9ZMhO7pd45zjmmZO1MXDEcD6SsXCQNDy7UHFDV+90KpiEcOEQ4QDigozlAc0BHc4DmgI7mAM0BHc0BmgM6mgM0B3Q0B2gO6GgO0BzQ0RygOaCjOUBzQEdzgOaAjuYAzQEdzQGaAzqaAzQHdDQHaA7oaA7QHNDRHKA5oKM5QHNA9x9AQtAQCKSvsgAAAABJRU5ErkJggg==">
+<title>Prototipo · Marketplace de servicios</title>
+<style>
+:root{
+  --accent:#0F766E; --accent-d:#115E59; --accent-t:#E6F4F1;
+  --orange:#C2410C; --orange-t:#FFEDD5;
+  --bg:#F7F8FA; --card:#FFFFFF; --ink:#111827; --ink2:#374151; --muted:#4B5563; --line:#E5E7EB; --line2:#D1D5DB;
+  --red:#B91C1C;
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,"Segoe UI",Roboto,sans-serif;font-size:16px;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent)}
+h1,h2,h3,p{margin:0}
+.app{min-height:100dvh;display:flex}
+/* Sidebar (desktop) */
+.side{display:none}
+.main{flex:1;min-width:0;display:flex;flex-direction:column;min-height:100dvh}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid var(--line);padding:calc(var(--sat) + 8px) 16px 10px}
+.top-row{display:flex;align-items:center;gap:8px;min-height:44px}
+.top-title{font-size:17px;font-weight:600;flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iconbtn{width:44px;height:44px;border-radius:22px;border:0;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);flex-shrink:0;position:relative}
+.iconbtn.ring{border:1px solid var(--line);background:#fff}
+.dot{position:absolute;top:9px;right:10px;width:9px;height:9px;border-radius:5px;background:var(--orange);border:2px solid #fff}
+.content{flex:1;width:100%;max-width:1040px;margin:0 auto;padding:16px 16px calc(96px + var(--sab));display:flex;flex-direction:column;gap:18px}
+.content.noTabs{padding-bottom:calc(24px + var(--sab))}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:var(--sab)}
+.tab{height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:500;color:var(--muted);text-decoration:none;border:0;background:none;cursor:pointer;position:relative}
+.tab.on{color:var(--accent);font-weight:600}
+.tab .badge{position:absolute;top:6px;left:calc(50% + 6px)}
+/* Mode switch */
+.mode{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:14px;background:#EEF0F2;margin-top:10px}
+.mode button{height:38px;border:0;border-radius:11px;background:transparent;display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer}
+.mode button.on{background:#fff;box-shadow:0 1px 3px rgba(17,24,39,.1);font-weight:650}
+.mode button.on.b{color:var(--accent)} .mode button.on.o{color:var(--orange)}
+/* Generic */
+.h1{font-size:26px;line-height:32px;font-weight:700;letter-spacing:-.02em}
+.h2{font-size:17px;font-weight:650}
+.sub{font-size:15px;line-height:22px;color:var(--muted)}
+.small{font-size:13px;color:var(--muted);line-height:19px}
+.row{display:flex;align-items:center;gap:12px}
+.between{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.card.tap{cursor:pointer;text-align:left;width:100%;display:block;color:inherit;font:inherit}
+.card.tap:active{transform:scale(.99)}
+.list{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.li{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid #F0F1F3;width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left;cursor:pointer;color:inherit;min-height:56px}
+.li:last-child{border-bottom:0}
+.li .grow{flex:1;min-width:0}
+.chev{color:#9CA3AF;flex-shrink:0}
+.btn{height:52px;border-radius:14px;border:0;background:var(--accent);color:#fff;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;cursor:pointer;text-decoration:none;padding:0 18px}
+.btn.o{background:var(--orange)}
+.btn.sec{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line2)}
+.btn.link{background:none;color:var(--accent);height:44px}
+.btn.danger{background:none;color:var(--red);height:44px}
+.btn[disabled]{background:#E5E7EB;color:#6B7280;cursor:not-allowed}
+.btn.sm{height:44px;font-size:14px;border-radius:12px}
+.btns{display:flex;gap:8px}
+.btns > *{flex:1}
+.field label,.lbl{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
+.input{width:100%;height:52px;padding:0 16px;border-radius:14px;border:1px solid var(--line2);background:#fff;font-size:16px;outline:none}
+.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(15,118,110,.15)}
+textarea.input{height:110px;padding:14px 16px;resize:none;line-height:22px}
+select.input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%234B5563' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.search{display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;border-radius:14px;background:#fff;border:1px solid var(--line2)}
+.search input{border:0;outline:none;flex:1;min-width:0;font-size:16px;background:transparent}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
+.chips::-webkit-scrollbar{display:none}
+.chip{height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--line2);background:#fff;font-size:14px;font-weight:500;white-space:nowrap;cursor:pointer;flex-shrink:0}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.grid-cat{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cat{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:500;border:0;background:none;cursor:pointer;color:var(--ink);padding:0}
+.cat span.ic{width:60px;height:60px;border-radius:18px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.av{width:48px;height:48px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-weight:650;flex-shrink:0;font-size:15px}
+.av.lg{width:76px;height:76px;border-radius:38px;font-size:24px}
+.av.sm{width:40px;height:40px;border-radius:20px;font-size:14px}
+.c1{background:#DBEAFE;color:#1E3A8A}.c2{background:#FCE7F3;color:#831843}.c3{background:#FEF3C7;color:#78350F}.c4{background:#E0E7FF;color:#3730A3}.c5{background:#DCFCE7;color:#14532D}
+.star{color:#B45309}
+.tag{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 9px;border-radius:12px;font-size:12px;font-weight:600;background:var(--accent-t);color:var(--accent-d)}
+.tag.o{background:var(--orange-t);color:#9A3412}
+.tag.g{background:#F0F1F3;color:var(--ink2)}
+.badge{min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--orange);color:#fff;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.banner{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:var(--accent-t);color:#134E4A;font-size:14px;line-height:20px}
+.banner.o{background:var(--orange-t);color:#7C2D12}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.kpi .k{font-size:12px;color:var(--muted)} .kpi .v{font-size:22px;font-weight:700;margin-top:4px}
+.photo{border-radius:12px;background:#E5E7EB;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);aspect-ratio:1}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.opt{display:flex;align-items:center;gap:12px;min-height:56px;padding:12px 16px;border-radius:14px;background:#fff;border:1px solid var(--line);cursor:pointer;font-size:15px;font-weight:500;width:100%;text-align:left}
+.opt.on{border:2px solid var(--accent);padding:11px 15px}
+.radio{width:20px;height:20px;border-radius:10px;border:2px solid var(--line2);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.opt.on .radio{border-color:var(--accent)} .opt.on .radio::after{content:"";width:10px;height:10px;border-radius:5px;background:var(--accent)}
+.sum div{display:flex;justify-content:space-between;font-size:15px;padding:4px 0}
+.sum .t{font-size:17px;font-weight:700;border-top:1px solid var(--line);margin-top:6px;padding-top:10px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:flex;gap:12px;min-height:52px}
+.tl .m{display:flex;flex-direction:column;align-items:center}
+.tl .c{width:24px;height:24px;border-radius:12px;border:2px solid var(--line2);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tl .done .c{background:var(--accent);border-color:var(--accent);color:#fff}
+.tl .now .c{border:3px solid var(--accent)}
+.tl .bar{width:2px;flex:1;background:var(--line);margin:2px 0}
+.tl .done .bar{background:var(--accent)}
+.tl .txt{padding-top:2px;font-size:15px}
+.tl .now .txt b{color:var(--accent)}
+.toggle{width:52px;height:32px;border-radius:16px;background:#D1D5DB;border:0;position:relative;cursor:pointer;flex-shrink:0}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:13px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .2s}
+.toggle.on{background:var(--accent)} .toggle.on::after{left:23px}
+.stars{display:flex;gap:8px;justify-content:center}
+.stars button{border:0;background:none;cursor:pointer;padding:4px;color:#D1D5DB}
+.stars button.on{color:#D97706}
+.msgs{display:flex;flex-direction:column;gap:8px}
+.msg{max-width:78%;padding:10px 14px;border-radius:18px;font-size:15px;line-height:21px}
+.msg.me{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:6px}
+.msg.them{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:6px}
+.composer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 12px calc(10px + var(--sab));display:flex;gap:8px;z-index:20}
+.composer input{flex:1;height:44px;border-radius:22px;border:1px solid var(--line2);padding:0 16px;outline:none;font-size:16px}
+.step-n{width:32px;height:32px;border-radius:16px;border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--muted);flex-shrink:0}
+.step-n.done{background:var(--accent);border-color:var(--accent);color:#fff}
+.progress{height:8px;border-radius:4px;background:var(--line)} .progress > div{height:8px;border-radius:4px;background:var(--accent);transition:width .3s}
+.upload{border:2px dashed var(--line2);border-radius:16px;padding:22px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:14px;cursor:pointer;background:#fff;width:100%}
+.upload.ok{border-style:solid;border-color:var(--accent);color:var(--accent-d);background:var(--accent-t)}
+.hero-auth{min-height:100dvh;display:flex;flex-direction:column;padding:calc(var(--sat) + 40px) 24px calc(var(--sab) + 28px);gap:24px;max-width:480px;margin:0 auto;width:100%}
+.logo{width:60px;height:60px;border-radius:18px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff}
+.choice{display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:20px;background:#fff;border:1px solid var(--line);cursor:pointer;text-align:left;width:100%}
+.choice:hover{border-color:var(--accent)}
+.choice .ic{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center}
+.otp{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.otp input{height:56px;border-radius:12px;border:1px solid var(--line2);text-align:center;font-size:22px;font-weight:650;outline:none;min-width:0}
+.otp input:focus{border:2px solid var(--accent)}
+.split{display:flex;flex-direction:column;gap:18px}
+.toast{position:fixed;left:50%;bottom:calc(84px + var(--sab));transform:translateX(-50%) translateY(20px);background:#111827;color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:all .25s;z-index:60;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.map-btn{position:fixed;right:14px;top:calc(var(--sat) + 12px);z-index:30;height:40px;padding:0 14px;border-radius:20px;border:0;background:#111827;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.2);cursor:pointer;opacity:.9}
+.sheet-bg{position:fixed;inset:0;background:rgba(17,24,39,.45);z-index:70;display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-height:85dvh;overflow:auto;background:#fff;border-radius:22px 22px 0 0;z-index:71;padding:8px 20px calc(24px + var(--sab));display:none}
+.sheet.show,.sheet-bg.show{display:block}
+.sheet h3{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:18px 0 8px}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:#D1D5DB;margin:6px auto 8px}
+.sheet .items{display:flex;flex-wrap:wrap;gap:8px}
+.sheet .items button{height:38px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:14px;cursor:pointer}
+.sheet .items button.cur{background:var(--accent);color:#fff;border-color:var(--accent)}
+.sticky-cta{position:sticky;bottom:calc(72px + var(--sab));background:linear-gradient(rgba(247,248,250,0),var(--bg) 30%);padding-top:16px;margin-top:auto}
+.noTabs .sticky-cta{bottom:calc(12px + var(--sab))}
+.two{display:flex;flex-direction:column;gap:18px}
+.prov-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.week button{height:62px;border-radius:14px;border:1px solid var(--line);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;color:var(--muted);cursor:pointer}
+.week button b{font-size:17px;color:var(--ink)}
+.week button.on{background:var(--accent);border-color:var(--accent);color:#CCFBF1}.week button.on b{color:#fff}
+.balance{background:var(--accent);color:#fff;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.balance .k{font-size:13px;color:#CCFBF1}.balance .v{font-size:32px;font-weight:700}
+.pick{width:116px;height:116px;border-radius:58px;border:2px dashed var(--line2);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;position:relative;flex-shrink:0;overflow:visible}
+.pick.err{border-color:var(--orange);color:var(--orange)}
+.pick img{width:100%;height:100%;border-radius:58px;object-fit:cover}
+.pick .edit{position:absolute;right:0;bottom:2px;width:36px;height:36px;border-radius:18px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid #fff}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 900px){
+  .side{display:flex;flex-direction:column;gap:4px;width:260px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);padding:24px 16px;position:sticky;top:0;height:100dvh}
+  .side .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;padding:0 8px 14px}
+  .side .brand .logo{width:36px;height:36px;border-radius:10px}
+  .side .mode{margin:0 0 14px}
+  .side a.nav{display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-radius:12px;color:var(--ink2);text-decoration:none;font-size:15px;font-weight:500;cursor:pointer}
+  .side a.nav.on{background:var(--accent-t);color:var(--accent-d);font-weight:650}
+  .side .foot{margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px 8px 0;border-top:1px solid var(--line);font-size:14px}
+  .tabbar{display:none}
+  .top .mode{display:none}
+  .content{padding:28px 32px 48px}
+  .content.noTabs{padding-bottom:48px}
+  .top{padding:12px 32px}
+  .top-title{text-align:left}
+  .two{flex-direction:row;align-items:flex-start}
+  .two > .a{flex:3;min-width:0;display:flex;flex-direction:column;gap:18px}
+  .two > .b{flex:2;min-width:0;display:flex;flex-direction:column;gap:18px}
+  .prov-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+  .grid-cat{grid-template-columns:repeat(8,1fr)}
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  .chips{margin:0;padding:0;flex-wrap:wrap}
+  .sticky-cta{bottom:0;position:static;background:none}
+  .narrow{max-width:560px;width:100%;margin:0 auto}
+  .composer{left:260px}
+  .toast{bottom:32px}
+  .sheet{left:auto;right:20px;bottom:20px;width:420px;border-radius:20px;max-height:80dvh}
+  .hero-auth{justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sheet-bg" id="sheetbg" onclick="closeMap()"></div>
+<div class="sheet" id="sheet" role="dialog" aria-label="Mapa de pantallas"></div>
+
+<script>
+/* ---------------- Iconos ---------------- */
+const P = {
+  back:'<path d="M15 5l-7 7 7 7"/>',
+  chev:'<path d="M9 5l7 7-7 7"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
+  tool:'<path d="M14 4l6 6-3 3-6-6zM11 7l-8 8 3 3 8-8"/>',
+  home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
+  cal:'<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+  chat:'<path d="M4 5h16v11H9l-5 4z"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+  wallet:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/>',
+  bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+  pin:'<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+  check:'<path d="M5 12l5 5 9-10"/>',
+  drop:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+  bolt:'<path d="M13 2L5 14h6l-1 8 8-12h-6l1-8z"/>',
+  brick:'<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 12h18M9 5v7M15 12v7"/>',
+  saw:'<path d="M4 15l11-11 5 5-11 11zM7 12l2 2M10 9l2 2"/>',
+  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/>',
+  food:'<path d="M4 11h16a8 8 0 0 1-16 0zM8 4c0 2 2 2 2 4M14 4c0 2 2 2 2 4"/>',
+  paint:'<rect x="4" y="3" width="14" height="6" rx="1"/><path d="M18 6h2v5h-8v3M10 14h4v7h-4z"/>',
+  box:'<path d="M3 7l9-4 9 4-9 4zM3 7v10l9 4 9-4V7M12 11v10"/>',
+  camera:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+  send:'<path d="M4 12l16-8-6 16-3-7z"/>',
+  card:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/>',
+  doc:'<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/>',
+  help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 .5c0 2-2.5 2-2.5 4M12 17.5v.5"/>',
+  out:'<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>',
+  star:'<path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21l1.5-7L2 9.3l7-.8z"/>',
+  map:'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+  grid:'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+  eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  bank:'<path d="M3 10l9-6 9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18"/>',
+  alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>',
+  heart:'<path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 8 3.5C20 15.3 12 20 12 20z"/>',
+  logo:'<path d="M7 12l3 3 7-7"/><path d="M12 3a9 9 0 1 0 9 9"/>'
+};
+const I = (n, s=22, w=2, extra='') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${P[n]}</svg>`;
+const STAR = (s=14) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="currentColor" class="star" aria-hidden="true">${P.star}</svg>`;
+
+/* ---------------- Datos de ejemplo ---------------- */
+const PROVS = {
+  laura:{n:'Laura Méndez',i:'LM',c:'c2',o:'Plomera',d:'Destapes, tinacos, bombas de agua',r:'4.8',rv:52,km:'2.4 km',when:'Hoy 6:30 pm',v:true},
+  javier:{n:'Javier Ramírez',i:'JR',c:'c1',o:'Plomero',d:'Fugas, calentadores, instalaciones',r:'4.9',rv:86,km:'1.2 km',when:'Hoy 4:00 pm',v:true},
+  sanchez:{n:'Plomería Sánchez',i:'PS',c:'c3',o:'Comercio · Plomería',d:'Instalaciones de gas y agua',r:'4.6',rv:31,km:'3.1 km',when:'Mañana',v:false},
+  mari:{n:'Cocina Doña Mari',i:'CD',c:'c5',o:'Comida casera',d:'Menú del día y pedidos para eventos',r:'4.9',rv:120,km:'0.8 km',when:'Abierto',v:true},
+  rosa:{n:'Rosa Hernández',i:'RH',c:'c4',o:'Electricista',d:'Contactos, centros de carga, iluminación',r:'4.7',rv:38,km:'1.9 km',when:'Mañana',v:true}
+};
+const CATS = [['Plomería','drop'],['Electricidad','bolt'],['Albañilería','brick'],['Carpintería','saw'],['Limpieza','spark'],['Comida','food'],['Pintura','paint'],['Mudanzas','box']];
+
+/* ---------------- Estado ---------------- */
+const S = {
+  mode:'buscar', ofrecerActivo:false, disponible:true,
+  pasos:{servicio:true, ine:false, rfc:false, clabe:false},
+  prov:'laura', cat:'Plomería', servicio:0, dia:'Hoy', hora:'4:00 pm', pago:'tarjeta',
+  terminado:false, rating:0, reservasTab:'activas', agendaDia:2, filtros:{hoy:true},
+  chat:[{me:false,t:'¡Hola! Ya vi la foto. ¿La llave de paso está cerrada?'},{me:true,t:'Sí, ya la cerré. Gracias.'},{me:false,t:'Perfecto, llego a las 4:10.'}],
+  ine:{frente:false,reverso:false,selfie:false}, reporte:0, cot:[['Visita de diagnóstico','$[PRECIO]'],['Cambio de tubo flexible','$[PRECIO]']],
+  _from:'registro', foto:null
+};
+try{ const saved = JSON.parse(localStorage.getItem('proto-state')||'null'); if(saved){ S.mode=saved.mode; S.ofrecerActivo=saved.ofrecerActivo; S.pasos=saved.pasos; } }catch(e){}
+function persist(){ try{ localStorage.setItem('proto-state', JSON.stringify({mode:S.mode,ofrecerActivo:S.ofrecerActivo,pasos:S.pasos})); }catch(e){} }
+
+/* ---------------- Helpers de UI ---------------- */
+const ME = (sz) => S.foto ? `<img class="av ${sz}" src="${S.foto}" alt="Tu foto de perfil" style="object-fit:cover">` : `<span class="av ${sz} c1">JR</span>`;
+function pickFoto(inp){ const f = inp.files && inp.files[0]; if(!f) return; const r = new FileReader(); r.onload = e => { S.foto = e.target.result; render(); toast('Foto agregada'); }; r.readAsDataURL(f); }
+function fotoDemo(){ const c=document.createElement('canvas'); c.width=c.height=240; const x=c.getContext('2d'); x.fillStyle='#DBEAFE'; x.fillRect(0,0,240,240); x.fillStyle='#93C5FD'; x.beginPath(); x.arc(120,95,48,0,7); x.fill(); x.beginPath(); x.ellipse(120,235,88,80,0,0,7); x.fill(); S.foto=c.toDataURL(); render(); toast('Foto de ejemplo agregada'); }
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function toast(t){ const el=document.getElementById('toast'); el.textContent=t; el.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('show'),2200); }
+function go(id){ location.hash = '#/' + id; }
+function back(fallback){ if(history.length > 1 && go._n > 0){ go._n--; history.back(); } else go(fallback || home()); }
+go._n = 0;
+function home(){ return S.mode === 'ofrecer' && S.ofrecerActivo ? 'ofrecer' : 'buscar'; }
+function setMode(m){
+  if(m === 'ofrecer' && !S.ofrecerActivo){ go('activar'); return; }
+  S.mode = m; persist(); go(m === 'ofrecer' ? 'ofrecer' : 'buscar');
+}
+function set(k, v){ S[k] = v; render(); }
+function provRow(id){
+  const p = PROVS[id];
+  return `<button class="card tap" onclick="S.prov='${id}';go('proveedor')">
+    <div class="row"><span class="av ${p.c}">${p.i}</span>
+      <div style="flex:1;min-width:0"><div class="row" style="gap:6px"><b style="font-size:16px">${p.n}</b>${p.v?`<span style="color:var(--accent)">${I('shield',16,2.2)}</span>`:''}</div>
+      <div class="small">${p.o} · ${p.km}</div></div>
+      <span class="row" style="gap:4px;font-weight:650;font-size:14px">${STAR()}${p.r}</span></div>
+    <div class="between small" style="margin-top:12px"><span>${p.d}</span></div>
+    <div class="between" style="margin-top:10px;font-size:14px"><span class="tag g">${p.when}</span><b>Desde $[PRECIO]</b></div>
+  </button>`;
+}
+const sec = (title, inner, action='') => `<section class="stack"><div class="between"><h2 class="h2">${title}</h2>${action}</div>${inner}</section>`;
+
+/* ---------------- Pantallas ---------------- */
+/* tipo de barra superior: 'home' | 'back' | 'none'; tabs: 'buscar' | 'ofrecer' | null */
+const SCREENS = {
+/* ===== Acceso ===== */
+bienvenida:{g:'Acceso', t:'Bienvenida', bar:'none', tabs:null, r:()=>`
+  <div class="hero-auth">
+    <div class="logo">${I('logo',32,2.2)}</div>
+    <div><p style="font-weight:650;color:var(--accent);margin-bottom:8px">[Tu marca]</p>
+    <h1 class="h1" style="font-size:32px;line-height:38px">Encuentra quién te ayude o gana dinero ayudando</h1>
+    <p class="sub" style="margin-top:12px">Una sola cuenta para contratar servicios cerca de ti y para ofrecer los tuyos.</p></div>
+    <div class="stack">
+      <div class="banner">${I('search',20)}<span><b>Busca</b> plomeros, electricistas, comida casera y más, con pago protegido.</span></div>
+      <div class="banner o">${I('tool',20)}<span><b>Ofrece</b> tu oficio o negocio y cobra directo a tu cuenta.</span></div>
+    </div>
+    <div class="stack" style="margin-top:auto">
+      <button class="btn" onclick="S._from='registro';go('registro')">Crear cuenta</button>
+      <button class="btn ghost" onclick="S._from='login';go('login')">Ya tengo cuenta</button>
+    </div>
+  </div>`},
+login:{g:'Acceso', t:'Iniciar sesión', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:20px">
+    <div><h1 class="h1">Inicia sesión</h1><p class="sub" style="margin-top:6px">Te enviaremos un código por WhatsApp o SMS.</p></div>
+    <div class="field"><label for="tel">Número de celular</label>
+      <div class="row" style="gap:8px"><span class="input" style="width:auto;display:flex;align-items:center;font-weight:500">+52</span><input id="tel" class="input" type="tel" inputmode="tel" placeholder="55 1234 5678"></div></div>
+    <button class="btn" onclick="go('codigo')">Continuar</button>
+    <div class="row small" style="gap:12px"><span style="flex:1;height:1px;background:var(--line)"></span>o<span style="flex:1;height:1px;background:var(--line)"></span></div>
+    <button class="btn ghost" onclick="go('elegir')">Continuar con Google</button>
+    <button class="btn ghost" onclick="go('elegir')">Continuar con Apple</button>
+    <p class="small" style="text-align:center">¿Primera vez? <a href="#/registro">Crea tu cuenta</a></p>
+  </div>`},
+registro:{g:'Acceso', t:'Crear cuenta', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:18px">
+    <div><h1 class="h1">Crea tu cuenta</h1><p class="sub" style="margin-top:6px">Una sola cuenta para contratar y para ofrecer servicios.</p></div>
+    <div class="card row" style="gap:16px;align-items:center">
+      <label class="pick ${S.foto?'':'err'}" aria-label="${S.foto?'Cambiar foto de perfil':'Agregar foto de perfil (obligatoria)'}">
+        <input type="file" accept="image/*" capture="user" class="sr" onchange="pickFoto(this)">
+        ${S.foto?`<img src="${S.foto}" alt="Tu foto de perfil"><span class="edit">${I('camera',16,2)}</span>`:`${I('camera',30,1.8)}<span>Agregar foto</span>`}
+      </label>
+      <div class="stack" style="gap:6px;flex:1;min-width:0">
+        <div class="row" style="gap:8px;flex-wrap:wrap"><b>Foto de perfil</b><span class="tag ${S.foto?'':'o'}">${S.foto?I('check',12,3)+' Lista':'Obligatoria'}</span></div>
+        <p class="small">Que se vea tu cara con claridad, sin lentes oscuros ni filtros. Genera confianza entre clientes y proveedores.</p>
+        ${S.foto?'':`<button class="btn link" style="height:auto;width:auto;justify-content:flex-start;padding:0;font-size:13px" onclick="fotoDemo()">Usar foto de ejemplo (prototipo)</button>`}
+      </div>
+    </div>
+    <div class="field"><label for="nom">Nombre completo</label><input id="nom" class="input" value="Javier Ramírez"></div>
+    <div class="field"><label for="cel">Número de celular</label><input id="cel" class="input" type="tel" value="+52 55 1234 5678"></div>
+    <div class="field"><label for="mail">Correo (opcional)</label><input id="mail" class="input" type="email" placeholder="tu@correo.com"></div>
+    <label class="row small" style="align-items:flex-start;gap:10px;color:var(--ink2)"><input type="checkbox" checked style="width:20px;height:20px;accent-color:var(--accent);margin:0"><span>Acepto los <a href="#/registro">Términos y condiciones</a> y el <a href="#/registro">Aviso de privacidad</a>.</span></label>
+    <button class="btn" ${S.foto?'':'disabled'} onclick="go('codigo')">Enviar código</button>
+    ${S.foto?'':'<p class="small" style="text-align:center;color:var(--orange);margin-top:-8px">Agrega tu foto de perfil para continuar</p>'}
+  </div>`},
+codigo:{g:'Acceso', t:'Verificar celular', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:20px">
+    <div><h1 class="h1">Escribe el código</h1><p class="sub" style="margin-top:6px">Lo enviamos por WhatsApp al +52 55 •••• 5678.</p></div>
+    <div class="otp" id="otp">${[0,1,2,3,4,5].map(i=>`<input inputmode="numeric" maxlength="1" aria-label="Dígito ${i+1}" oninput="otpNext(this,${i})">`).join('')}</div>
+    <p class="small">¿No llegó? <a href="#/codigo" onclick="toast('Código reenviado');return false">Reenviar código</a></p>
+    <button class="btn" onclick="go('elegir')">Verificar</button>
+  </div>`},
+elegir:{g:'Acceso', t:'¿Qué quieres hacer?', bar:'none', tabs:null, r:()=>`
+  <div class="hero-auth" style="background:var(--bg)">
+    <div><p class="sub">¡Listo, Javier!</p><h1 class="h1" style="font-size:30px;line-height:36px;margin-top:4px">¿Qué quieres hacer primero?</h1></div>
+    <button class="choice" onclick="setMode('buscar')">
+      <span class="ic" style="background:var(--accent-t);color:var(--accent)">${I('search',28)}</span>
+      <b style="font-size:20px">Busco un servicio</b>
+      <span class="sub" style="font-size:14px">Encuentra quien te ayude cerca de ti y paga seguro en la app.</span></button>
+    <button class="choice" onclick="setMode('ofrecer')">
+      <span class="ic" style="background:var(--orange-t);color:var(--orange)">${I('tool',28)}</span>
+      <b style="font-size:20px">Ofrezco un servicio</b>
+      <span class="sub" style="font-size:14px">Publica tu oficio o negocio, recibe solicitudes y cobra a tu cuenta.</span></button>
+    <div class="card row small" style="margin-top:auto;color:var(--ink2)">${I('logo',20)}Tu cuenta sirve para las dos cosas. Cambia de modo cuando quieras.</div>
+  </div>`},
+
+/* ===== Modo Buscar ===== */
+buscar:{g:'Buscar', t:'Inicio', bar:'home', tabs:'buscar', tab:0, r:()=>`
+  <h1 class="h1">¿Qué necesitas resolver hoy?</h1>
+  <form class="search" onsubmit="go('resultados');return false">${I('search',20)}<label class="sr" for="q">Buscar</label><input id="q" type="search" placeholder="Ej. fuga en el baño, pastel para hoy"></form>
+  <div class="grid-cat">${CATS.map(([n,ic])=>`<button class="cat" onclick="S.cat='${n}';go('resultados')"><span class="ic">${I(ic,26,1.8)}</span>${n}</button>`).join('')}</div>
+  <div class="banner">${I('shield',22)}<span><b>Pago protegido.</b> El proveedor recibe tu pago solo cuando confirmas que el trabajo quedó listo.</span></div>
+  ${sec('Reserva activa', `<button class="card tap" onclick="go('seguimiento')"><div class="row"><span class="av sm c2">LM</span><div style="flex:1"><b>Fuga debajo del lavabo</b><div class="small">Laura Méndez · Hoy 4:00 pm</div></div><span class="tag">En camino</span></div></button>`)}
+  ${sec('Mejor calificados cerca de ti', `<div class="prov-grid">${provRow('laura')}${provRow('mari')}${provRow('rosa')}</div>`, `<a href="#/resultados" style="font-size:14px;font-weight:600;text-decoration:none">Ver todos</a>`)}
+`},
+resultados:{g:'Buscar', t:'Resultados', bar:'back', tabs:'buscar', tab:0, title:()=>S.cat, r:()=>`
+  <div class="between"><p class="small">12 proveedores cerca de Roma Norte</p><button class="chip" onclick="toast('Vista de mapa (próximamente)')">${I('map',16)} Mapa</button></div>
+  <div class="chips">${['Disponible hoy','4.5+ estrellas','Verificados','Más cerca','Menor precio'].map((f,i)=>`<button class="chip ${S.filtros[i]?'on':''}" onclick="S.filtros[${i}]=!S.filtros[${i}];render()">${f}</button>`).join('')}</div>
+  <div class="prov-grid">${provRow('laura')}${provRow('javier')}${provRow('sanchez')}</div>
+  <p class="small" style="text-align:center">Los perfiles destacados se marcarían como “Patrocinado”.</p>
+`},
+proveedor:{g:'Buscar', t:'Perfil del proveedor', bar:'back', tabs:'buscar', tab:0, title:()=>'', r:()=>{ const p=PROVS[S.prov]; return `
+  <div class="two"><div class="a">
+  <div class="card stack" style="gap:14px">
+    <div class="row" style="gap:14px"><span class="av lg ${p.c}">${p.i}</span><div class="stack" style="gap:4px">
+      <h1 class="h1" style="font-size:22px;line-height:28px">${p.n}</h1><p class="small">${p.o} · Roma Norte y alrededores</p>
+      ${p.v?`<span class="tag" style="align-self:flex-start">${I('check',12,3)} Identidad verificada</span>`:`<span class="tag g" style="align-self:flex-start">Comercio registrado</span>`}</div>
+      <button class="iconbtn ring" style="margin-left:auto" aria-label="Guardar" onclick="toast('Guardado en favoritos')">${I('heart',20,1.8)}</button></div>
+    <div class="grid3">${[[p.r,p.rv+' reseñas'],['140','trabajos'],['~20 min','en responder']].map(([a,b])=>`<div style="background:var(--bg);border-radius:12px;padding:10px;text-align:center"><b style="font-size:17px">${a}</b><div class="small" style="font-size:12px">${b}</div></div>`).join('')}</div>
+    <p style="font-size:15px;line-height:22px;color:var(--ink2)">${p.d}. Atiendo en Roma, Condesa y Juárez. Llevo material básico.</p>
+  </div>
+  ${sec('Servicios y precios', `<div class="stack" style="gap:8px">${['Visita de diagnóstico','Reparación de fuga','Instalación de calentador'].map((s,i)=>`<button class="opt ${S.servicio===i?'on':''}" onclick="set('servicio',${i})"><span class="radio"></span><span style="flex:1">${s}</span><b>${i?'desde ':''}$[PRECIO]</b></button>`).join('')}</div>`)}
+  </div><div class="b">
+  ${sec('Trabajos recientes', `<div class="grid3">${[1,2,3].map(()=>`<div class="photo">Foto</div>`).join('')}</div>`)}
+  ${sec('Reseñas', `<div class="stack">${[['Ana G.','hace 3 días','Llegó a tiempo, explicó el problema y dejó todo limpio.'],['Carlos P.','hace 2 semanas','Muy profesional. El precio fue el que cotizó.']].map(([a,b,c])=>`<div class="card stack" style="gap:6px"><div class="between small"><b style="color:var(--ink)">${a}</b><span>${STAR(12)}${STAR(12)}${STAR(12)}${STAR(12)}${STAR(12)} · ${b}</span></div><p style="font-size:14px;line-height:20px;color:var(--ink2)">${c}</p></div>`).join('')}</div>`)}
+  </div></div>
+  <div class="sticky-cta"><div class="btns"><button class="btn sec" onclick="go('chat')">Mensaje</button><button class="btn" onclick="go('solicitar')">Solicitar servicio</button></div></div>
+`}},
+solicitar:{g:'Buscar', t:'Solicitar servicio', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:18px">
+  <div class="row"><span class="av sm ${PROVS[S.prov].c}">${PROVS[S.prov].i}</span><div><b>${PROVS[S.prov].n}</b><div class="small">${['Visita de diagnóstico','Reparación de fuga','Instalación de calentador'][S.servicio]}</div></div></div>
+  <div class="field"><label for="desc">Describe el problema</label><textarea id="desc" class="input">Gotea el tubo debajo del lavabo del baño. Ya cerré la llave de paso.</textarea></div>
+  <button class="upload" onclick="this.classList.add('ok');this.innerHTML='${I('check',22,2.4).replace(/"/g,'&quot;')} 2 fotos agregadas'">${I('camera',26,1.8)}Agregar fotos (opcional)</button>
+  <div><span class="lbl">¿Cuándo?</span><div class="chips">${['Hoy','Mañana','Sáb 28','Dom 29','Otra fecha'].map(d=>`<button class="chip ${S.dia===d?'on':''}" onclick="set('dia','${d}')">${d}</button>`).join('')}</div></div>
+  <div><span class="lbl">Horario de llegada</span><div class="slots">${['9:00 am','11:00 am','1:00 pm','4:00 pm','5:30 pm','7:00 pm'].map(h=>`<button class="chip ${S.hora===h?'on':''}" style="height:44px" onclick="set('hora','${h}')">${h}</button>`).join('')}</div></div>
+  <div class="field"><label for="dir">Dirección</label><div class="search">${I('pin',20)}<input id="dir" value="Calle [DIRECCIÓN], Roma Norte"></div></div>
+  <button class="btn" onclick="go('pago')">Continuar al pago</button>
+  </div>`},
+pago:{g:'Buscar', t:'Pago', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:18px">
+  <div class="card stack" style="gap:8px"><div class="between"><b>Tu solicitud</b><a href="#/solicitar" style="font-size:14px;text-decoration:none;font-weight:600">Editar</a></div>
+    <div class="row small" style="color:var(--ink2)">${I('cal',18,1.8)}${S.dia}, ${S.hora}</div><div class="row small" style="color:var(--ink2)">${I('pin',18,1.8)}Calle [DIRECCIÓN], Roma Norte</div></div>
+  <div><span class="lbl">Método de pago</span><div class="stack" style="gap:8px">
+    ${[['tarjeta','Tarjeta de crédito o débito','•••• 4821'],['oxxo','Efectivo en OXXO','Paga antes de la cita'],['spei','Transferencia SPEI','']].map(([k,a,b])=>`<button class="opt ${S.pago===k?'on':''}" onclick="set('pago','${k}')"><span class="radio"></span><span style="flex:1">${a}</span><span class="small">${b}</span></button>`).join('')}
+    <button class="btn link" onclick="toast('Agregar tarjeta')">${I('plus',18)} Agregar tarjeta</button></div></div>
+  <div class="card sum"><div><span class="small" style="font-size:15px">${['Visita de diagnóstico','Reparación de fuga','Instalación de calentador'][S.servicio]}</span><span>$[PRECIO]</span></div><div><span class="small" style="font-size:15px">Tarifa de servicio</span><span>$[TARIFA]</span></div><div class="t"><span>Total</span><span>$[TOTAL]</span></div></div>
+  <div class="banner">${I('shield',20)}<span>Retenemos tu pago y lo liberamos al proveedor cuando confirmes el trabajo. Cancelación gratis hasta 2 horas antes.</span></div>
+  <button class="btn" onclick="go('pago-ok')">Pagar $[TOTAL]</button>
+  </div>`},
+'pago-ok':{g:'Buscar', t:'Pago confirmado', bar:'none', tabs:null, r:()=>`
+  <div class="hero-auth" style="justify-content:center;text-align:center;align-items:center">
+    <span style="width:88px;height:88px;border-radius:44px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center">${I('check',44,2.6)}</span>
+    <h1 class="h1">¡Solicitud enviada!</h1>
+    <p class="sub">${PROVS[S.prov].n} tiene 15 minutos para confirmar. Tu pago está protegido hasta que confirmes el trabajo.</p>
+    <div class="card" style="width:100%;text-align:left"><div class="between"><span class="small">Folio</span><b>#[FOLIO]</b></div><div class="between" style="margin-top:8px"><span class="small">Cuándo</span><b>${S.dia}, ${S.hora}</b></div></div>
+    <div class="stack" style="width:100%;margin-top:12px"><button class="btn" onclick="go('seguimiento')">Ver seguimiento</button><button class="btn link" onclick="go('buscar')">Volver al inicio</button></div>
+  </div>`},
+seguimiento:{g:'Buscar', t:'Seguimiento', bar:'back', tabs:'buscar', tab:1, r:()=>{ const p=PROVS[S.prov]; const T=S.terminado; return `
+  <div class="two"><div class="a">
+  <div><p class="small" style="color:var(--accent);font-weight:650">Reserva #[FOLIO]</p><h1 class="h1" style="margin-top:4px">${T?'Trabajo terminado':p.n.split(' ')[0]+' va en camino'}</h1><p class="sub" style="margin-top:4px">${T?'Revisa y confirma para liberar el pago.':'Llegada estimada 4:10 pm'}</p></div>
+  <div class="card row"><span class="av ${p.c}">${p.i}</span><div style="flex:1"><b>${p.n}</b><div class="small">${p.o} · ${STAR(12)} ${p.r}</div></div>
+    <button class="iconbtn ring" aria-label="Mensaje" onclick="go('chat')" style="color:var(--accent)">${I('chat',20,1.8)}</button><button class="iconbtn ring" aria-label="Llamar" onclick="toast('Llamando…')" style="color:var(--accent)">${I('phone',20,1.8)}</button></div>
+  </div><div class="b">
+  <div class="card"><h2 class="h2" style="margin-bottom:14px">Estado</h2><ol class="tl">
+    ${[['Pago recibido y protegido','2:15 pm',1],['Proveedor confirmó la cita','2:22 pm',1],['En camino','4:00 pm',T?1:2],['Trabajo terminado','',T?2:0],['Confirmas y se libera el pago','',0]].map(([a,b,st],i,arr)=>`<li class="${st===1?'done':st===2?'now':''}"><span class="m"><span class="c">${st===1?I('check',14,3):''}</span>${i<arr.length-1?'<span class="bar"></span>':''}</span><span class="txt"><b style="font-weight:${st?650:400};${st?'':'color:var(--muted)'}">${a}</b>${b?`<div class="small" style="font-size:12px">${b}</div>`:''}</span></li>`).join('')}
+  </ol></div>
+  ${T?'':`<button class="btn ghost sm" onclick="S.terminado=true;render();toast('El proveedor marcó el trabajo como terminado')">Simular: el proveedor terminó</button>`}
+  </div></div>
+  <div class="sticky-cta stack" style="gap:6px"><button class="btn" ${T?'':'disabled'} onclick="go('calificar')">Confirmar trabajo terminado</button>${T?'':'<p class="small" style="text-align:center">Se activa cuando el proveedor marque el trabajo como listo</p>'}<button class="btn danger" onclick="go('reporte')">Reportar un problema</button></div>
+`}},
+calificar:{g:'Buscar', t:'Calificar', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:20px;text-align:center;align-items:center">
+    <span class="av lg ${PROVS[S.prov].c}">${PROVS[S.prov].i}</span>
+    <div><h1 class="h1">¿Cómo te fue con ${PROVS[S.prov].n.split(' ')[0]}?</h1><p class="sub" style="margin-top:6px">El pago ya se liberó. Tu reseña ayuda a otros vecinos.</p></div>
+    <div class="stars">${[1,2,3,4,5].map(n=>`<button class="${S.rating>=n?'on':''}" aria-label="${n} estrellas" onclick="set('rating',${n})"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">${P.star}</svg></button>`).join('')}</div>
+    <div class="chips" style="justify-content:center;flex-wrap:wrap">${['Puntual','Limpio','Buen precio','Amable','Explicó bien'].map(t=>`<button class="chip" onclick="this.classList.toggle('on')">${t}</button>`).join('')}</div>
+    <textarea class="input" aria-label="Comentario" placeholder="Cuéntanos más (opcional)"></textarea>
+    <button class="btn" onclick="S.terminado=false;S.rating=0;S.reservasTab='pasadas';toast('¡Gracias por tu reseña!');go('reservas')">Enviar reseña</button>
+  </div>`},
+reporte:{g:'Buscar', t:'Reportar un problema', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px">
+    <div><h1 class="h1">¿Qué pasó?</h1><p class="sub" style="margin-top:6px">Tu pago sigue protegido mientras revisamos.</p></div>
+    <div class="stack" style="gap:8px">${['El proveedor no llegó','El trabajo quedó mal o incompleto','Me cobró más de lo acordado','Problema de seguridad','Otro'].map((t,i)=>`<button class="opt ${S.reporte===i?'on':''}" onclick="set('reporte',${i})"><span class="radio"></span>${t}</button>`).join('')}</div>
+    <textarea class="input" aria-label="Detalles" placeholder="Describe lo que pasó"></textarea>
+    <button class="upload">${I('camera',24,1.8)}Agregar fotos como evidencia</button>
+    <button class="btn" onclick="toast('Reporte enviado. Te contactamos en menos de 24 h.');go('seguimiento')">Enviar reporte</button>
+  </div>`},
+reservas:{g:'Buscar', t:'Mis reservas', bar:'back', tabs:'buscar', tab:1, title:()=>'Mis reservas', r:()=>`
+  <div class="mode" style="margin:0">${['activas','pasadas'].map(k=>`<button class="${S.reservasTab===k?'on b':''}" onclick="set('reservasTab','${k}')">${k==='activas'?'Activas':'Pasadas'}</button>`).join('')}</div>
+  ${S.reservasTab==='activas' ? `<div class="stack">
+    <button class="card tap" onclick="S.prov='laura';go('seguimiento')"><div class="row"><span class="av sm c2">LM</span><div style="flex:1"><b>Fuga debajo del lavabo</b><div class="small">Laura Méndez · Hoy 4:00 pm</div></div><span class="tag">En camino</span></div></button>
+    <button class="card tap" onclick="S.prov='mari';go('seguimiento')"><div class="row"><span class="av sm c5">CD</span><div style="flex:1"><b>Comida para 12 personas</b><div class="small">Cocina Doña Mari · Sáb 28, 2:00 pm</div></div><span class="tag g">Confirmada</span></div></button></div>`
+  : `<div class="stack">${[['rosa','Contacto sin luz','15 nov'],['javier','Cambio de calentador','2 nov']].map(([k,a,b])=>`<button class="card tap" onclick="S.prov='${k}';go('proveedor')"><div class="row"><span class="av sm ${PROVS[k].c}">${PROVS[k].i}</span><div style="flex:1"><b>${a}</b><div class="small">${PROVS[k].n} · ${b}</div></div><span class="small">Volver a pedir</span></div></button>`).join('')}</div>`}
+`},
+mensajes:{g:'Compartidas', t:'Mensajes', bar:'back', tabs:'auto', tab:2, title:()=>'Mensajes', r:()=>`
+  <div class="list">${[['laura','Perfecto, llego a las 4:10.','4:02 pm',1],['mari','¿Quieren agregar postre?','Ayer',0],['ana','(Como proveedor) ¿Puede venir hoy?','Ayer',0]].map(([k,m,t,u])=>{ const p=k==='ana'?{n:'Ana G.',i:'AG',c:'c4'}:PROVS[k]; return `<button class="li" onclick="${k!=='ana'?`S.prov='${k}';`:''}go('chat')"><span class="av ${p.c}">${p.i}</span><span class="grow"><span class="between"><b>${p.n}</b><span class="small" style="font-size:12px">${t}</span></span><span class="small" style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${m}</span></span>${u?'<span class="badge">1</span>':''}</button>`}).join('')}</div>
+  <p class="small" style="text-align:center">Los chats de ambos modos aparecen aquí, marcados por tipo.</p>
+`},
+chat:{g:'Compartidas', t:'Chat', bar:'back', tabs:null, title:()=>PROVS[S.prov].n, r:()=>`
+  <div class="tag g" style="align-self:center">Reserva #[FOLIO] · ${S.dia}, ${S.hora}</div>
+  <div class="msgs" id="msgs">${S.chat.map(m=>`<div class="msg ${m.me?'me':'them'}">${esc(m.t)}</div>`).join('')}</div>
+  <p class="small" style="text-align:center;font-size:12px">Por tu seguridad, no compartas datos de pago fuera de la app.</p>
+  <div style="height:70px"></div>
+  <form class="composer" onsubmit="sendMsg();return false"><label class="sr" for="cm">Mensaje</label><input id="cm" placeholder="Escribe un mensaje" autocomplete="off"><button class="iconbtn" style="background:var(--accent);color:#fff" aria-label="Enviar">${I('send',20)}</button></form>
+`},
+notificaciones:{g:'Compartidas', t:'Notificaciones', bar:'back', tabs:null, r:()=>`
+  <div class="list">${[['Laura va en camino','Llegada estimada 4:10 pm','Hace 5 min','seguimiento','b'],['Nueva solicitud','Fuga debajo del lavabo · Roma Norte','Hace 12 min','solicitud','o'],['Pago liberado','Recibiste $[NETO] por “Revisión de tinaco”','Ayer','pagos','o'],['Tu reseña se publicó','Gracias por calificar a Rosa','15 nov','reservas','b']].map(([a,b,c,to,m])=>`<button class="li" onclick="${m==='o'?(S.ofrecerActivo?`S.mode='ofrecer';`:''):`S.mode='buscar';`}go('${m==='o'&&!S.ofrecerActivo?'activar':to}')"><span class="av sm" style="background:${m==='o'?'var(--orange-t)':'var(--accent-t)'};color:${m==='o'?'var(--orange)':'var(--accent)'}">${I(m==='o'?'tool':'search',18)}</span><span class="grow"><b style="font-size:15px">${a}</b><span class="small" style="display:block">${b}</span></span><span class="small" style="font-size:12px">${c}</span></button>`).join('')}</div>`},
+
+/* ===== Cuenta (compartida) ===== */
+cuenta:{g:'Compartidas', t:'Cuenta', bar:'back', tabs:'auto', tab:3, title:()=>'Cuenta', r:()=>`
+  <div class="card row" style="gap:14px">${ME('lg')}<div style="flex:1"><h1 class="h1" style="font-size:22px">Javier Ramírez</h1><p class="small">+52 55 •••• 5678</p></div><label class="btn ghost sm" style="width:auto;cursor:pointer"><input type="file" accept="image/*" class="sr" onchange="pickFoto(this)">Cambiar foto</label></div>
+  ${sec('Tus modos', `<div class="list">
+    <button class="li" onclick="setMode('buscar')"><span class="av sm" style="background:var(--accent-t);color:var(--accent)">${I('search',18)}</span><span class="grow"><b>Buscar servicios</b><span class="small" style="display:block">Activo</span></span><span class="tag">Activo</span></button>
+    <button class="li" onclick="setMode('ofrecer')"><span class="av sm" style="background:var(--orange-t);color:var(--orange)">${I('tool',18)}</span><span class="grow"><b>Ofrecer servicios</b><span class="small" style="display:block">${S.ofrecerActivo?'Plomería · Verificado':'Completa 4 pasos para activarlo'}</span></span>${S.ofrecerActivo?'<span class="tag o">Activo</span>':'<span class="chev">'+I('chev',18)+'</span>'}</button></div>`)}
+  ${sec('Configuración', `<div class="list">
+    ${[['card','Métodos de pago','tarjeta'],['pin','Direcciones guardadas',''],['bell','Notificaciones','notificaciones'],...(S.ofrecerActivo?[['doc','Datos fiscales (RFC)','paso-rfc'],['bank','Cuenta para cobrar (CLABE)','paso-clabe'],['eye','Mi perfil público','perfil-publico']]:[]),['help','Ayuda y soporte','ayuda'],['doc','Términos y aviso de privacidad','']].map(([ic,t,to])=>`<button class="li" onclick="${to&&to!=='tarjeta'?`go('${to}')`:`toast('${t}')`}"><span style="color:var(--muted)">${I(ic,20,1.8)}</span><span class="grow">${t}</span><span class="chev">${I('chev',18)}</span></button>`).join('')}
+    <button class="li" style="color:var(--red)" onclick="go('bienvenida')"><span>${I('out',20,1.8)}</span><span class="grow">Cerrar sesión</span></button></div>`)}
+`},
+ayuda:{g:'Compartidas', t:'Ayuda y soporte', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px">
+  <h1 class="h1">¿En qué te ayudamos?</h1>
+  <form class="search" onsubmit="return false">${I('search',20)}<input aria-label="Buscar en ayuda" placeholder="Buscar en preguntas frecuentes"></form>
+  <div class="list">${['¿Cómo funciona el pago protegido?','¿Cómo cancelo una reserva?','¿Por qué me retienen ISR e IVA?','¿Cuándo recibo mi dinero?','¿Cómo verifican a los proveedores?'].map(q=>`<button class="li" onclick="toast('Abrir artículo')"><span class="grow">${q}</span><span class="chev">${I('chev',18)}</span></button>`).join('')}</div>
+  <button class="btn sec" onclick="toast('Abriendo chat con soporte')">${I('chat',20)} Hablar con soporte</button></div>`},
+
+/* ===== Activar modo Ofrecer ===== */
+activar:{g:'Ofrecer · activación', t:'Activar modo Ofrecer', bar:'back', tabs:null, r:()=>{ const ks=['servicio','ine','rfc','clabe']; const done=ks.filter(k=>S.pasos[k]).length; const next=ks.find(k=>!S.pasos[k]); return `
+  <div class="narrow stack" style="gap:18px">
+  <div><h1 class="h1">Activa tu modo Ofrecer</h1><p class="sub" style="margin-top:6px">Usas la misma cuenta. Solo necesitamos estos datos para que puedas cobrar.</p></div>
+  <div><div class="between small" style="font-weight:650;color:var(--ink);margin-bottom:8px"><span>${done} de 4 pasos</span><span class="small">~5 min</span></div><div class="progress"><div style="width:${done*25}%"></div></div></div>
+  <div class="stack" style="gap:10px">${[['servicio','Tu servicio','Oficio, zona y precios base','Plomería · Roma Norte y 5 km'],['ine','Verifica tu identidad','Foto de tu INE y una selfie','Identidad verificada'],['rfc','Datos fiscales','RFC: con él te retenemos 2.5% de ISR; sin él, la ley pide 20%','RFC registrado'],['clabe','Cuenta para cobrar','Tu CLABE interbancaria','CLABE •••• 7731']].map(([k,a,b,ok],i)=>`<button class="card tap row" style="display:flex;${next===k?'border:2px solid var(--accent);':''}" onclick="go('paso-${k}')"><span class="step-n ${S.pasos[k]?'done':''}" style="${next===k?'border-color:var(--accent);color:var(--accent)':''}">${S.pasos[k]?I('check',16,3):i+1}</span><span style="flex:1"><b>${a}</b><span class="small" style="display:block">${S.pasos[k]?ok:b}</span></span><span class="chev">${I('chev',18)}</span></button>`).join('')}</div>
+  ${done===4?`<button class="btn o" onclick="S.ofrecerActivo=true;S.mode='ofrecer';persist();toast('¡Listo! Ya puedes recibir solicitudes');go('ofrecer')">Empezar a recibir trabajos</button>`:`<button class="btn" onclick="go('paso-${next}')">Continuar</button>`}
+  <button class="btn link" onclick="S.mode='buscar';go('buscar')">Terminar después</button></div>
+`}},
+'paso-servicio':{g:'Ofrecer · activación', t:'Tu servicio', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px"><p class="small">Paso 1 de 4</p><h1 class="h1">¿Qué servicio ofreces?</h1>
+  <div class="field"><label for="of">Oficio o tipo de negocio</label><select id="of" class="input">${CATS.map(c=>`<option>${c[0]}</option>`).join('')}</select></div>
+  <div class="field"><label>¿Eres persona o negocio?</label><div class="mode" style="margin:0"><button class="on b" onclick="this.classList.add('on','b');this.nextElementSibling.classList.remove('on','b')">Persona</button><button onclick="this.classList.add('on','b');this.previousElementSibling.classList.remove('on','b')">Negocio</button></div></div>
+  <div class="field"><label for="zn">Zona donde trabajas</label><div class="search">${I('pin',20)}<input id="zn" value="Roma Norte, CDMX"></div><p class="small" style="margin-top:6px">Radio de 5 km</p></div>
+  <div class="field"><label for="ds">Describe tu servicio</label><textarea id="ds" class="input">Fugas, calentadores e instalaciones. 10 años de experiencia.</textarea></div>
+  <div class="field"><label for="pb">Precio de visita de diagnóstico</label><input id="pb" class="input" inputmode="decimal" placeholder="$[PRECIO]"></div>
+  <button class="btn" onclick="S.pasos.servicio=true;persist();go('activar')">Guardar y continuar</button></div>`},
+'paso-ine':{g:'Ofrecer · activación', t:'Verifica tu identidad', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px"><p class="small">Paso 2 de 4</p><h1 class="h1">Verifica tu identidad</h1><p class="sub">Los clientes verán la insignia de “verificado”. Tus documentos no se muestran a nadie.</p>
+  ${[['frente','INE de frente'],['reverso','INE por detrás'],['selfie','Selfie sosteniendo tu INE']].map(([k,t])=>`<button class="upload ${S.ine[k]?'ok':''}" onclick="S.ine.${k}=true;render()">${S.ine[k]?I('check',26,2.4):I('camera',26,1.8)}<b>${t}</b><span>${S.ine[k]?'Foto lista':'Toca para tomar la foto'}</span></button>`).join('')}
+  <button class="btn" ${S.ine.frente&&S.ine.reverso&&S.ine.selfie?'':'disabled'} onclick="S.pasos.ine=true;persist();toast('Identidad enviada a revisión');go('activar')">Enviar para verificar</button></div>`},
+'paso-rfc':{g:'Ofrecer · activación', t:'Datos fiscales', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px"><p class="small">Paso 3 de 4</p><h1 class="h1">Datos fiscales</h1>
+  <div class="banner">${I('doc',20)}<span>Por ley, la plataforma retiene impuestos de cada cobro. <b>Con RFC: 2.5% de ISR.</b> Sin RFC: 20% de ISR y 100% del IVA.</span></div>
+  <div class="field"><label for="rfc">RFC</label><input id="rfc" class="input" style="text-transform:uppercase" value="RAJA850101AB1"></div>
+  <div class="field"><label for="rg">Régimen fiscal</label><select id="rg" class="input"><option>Plataformas tecnológicas</option><option>RESICO</option><option>Actividad empresarial</option><option>Persona moral</option></select></div>
+  <div class="field"><label for="cp">Código postal fiscal</label><input id="cp" class="input" inputmode="numeric" value="06700"></div>
+  <p class="small">Cada mes te damos la constancia de retenciones para tu declaración.</p>
+  <button class="btn" onclick="S.pasos.rfc=true;persist();go('activar')">Guardar y continuar</button>
+  <button class="btn link" onclick="toast('Podrás agregarlo después; se aplicará la retención de 20%');go('activar')">No tengo RFC todavía</button></div>`},
+'paso-clabe':{g:'Ofrecer · activación', t:'Cuenta para cobrar', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px"><p class="small">Paso 4 de 4</p><h1 class="h1">¿Dónde te depositamos?</h1>
+  <div class="field"><label for="cl">CLABE interbancaria (18 dígitos)</label><input id="cl" class="input" inputmode="numeric" value="012 180 0012 3456 7731"></div>
+  <div class="card row">${I('bank',22,1.8)}<div><b>BBVA México</b><div class="small">Detectado por tu CLABE</div></div></div>
+  <div class="field"><label for="tt">Titular de la cuenta</label><input id="tt" class="input" value="Javier Ramírez"></div>
+  <p class="small">El titular debe coincidir con tu INE y tu RFC.</p>
+  <button class="btn" onclick="S.pasos.clabe=true;persist();go('activar')">Guardar</button></div>`},
+
+/* ===== Modo Ofrecer ===== */
+ofrecer:{g:'Ofrecer', t:'Inicio', bar:'home', tabs:'ofrecer', tab:0, r:()=>`
+  <div class="card between"><div><b>${S.disponible?'Disponible para trabajos':'No disponible'}</b><div class="small">${S.disponible?'Apareces en las búsquedas':'No recibirás solicitudes nuevas'}</div></div><button class="toggle ${S.disponible?'on':''}" aria-label="Disponible" onclick="set('disponible',!S.disponible)"></button></div>
+  <div class="kpis">${[['Disponible para retirar','$[MONTO]','pagos'],['Por liberar','$[MONTO]','pagos'],['Citas de hoy','2','agenda'],['Calificación','4.9','perfil-publico']].map(([k,v,to])=>`<button class="card tap kpi" onclick="go('${to}')"><div class="k">${k}</div><div class="v">${v}</div></button>`).join('')}</div>
+  <div class="two"><div class="a">
+  ${sec('Solicitudes nuevas <span class="badge" style="margin-left:4px">2</span>', `<div class="stack">
+    <button class="card tap stack" style="display:flex;gap:8px" onclick="go('solicitud')"><div class="between"><b>Fuga debajo del lavabo</b><span class="small" style="color:var(--orange);font-weight:650">14 min</span></div><div class="small">Ana G. · Roma Norte · 1.2 km · Hoy 4:00 pm</div></button>
+    <button class="card tap stack" style="display:flex;gap:8px" onclick="go('solicitud')"><div class="between"><b>Cambio de calentador</b><span class="small" style="color:var(--orange);font-weight:650">40 min</span></div><div class="small">Mario T. · Condesa · Mañana 10:00 am</div></button></div>`)}
+  </div><div class="b">
+  ${sec('Agenda de hoy', `<div class="list">${[['12:00','Destape de coladera','Juárez'],['6:30','Revisión de tinaco','Roma Sur']].map(([h,a,b])=>`<button class="li" onclick="go('trabajo')"><b style="width:52px">${h}</b><span class="grow">${a}<span class="small" style="display:block">${b}</span></span><span class="chev">${I('chev',18)}</span></button>`).join('')}</div>`, `<a href="#/agenda" style="font-size:14px;font-weight:600;text-decoration:none">Ver agenda</a>`)}
+  <button class="card tap between" style="display:flex" onclick="go('perfil-publico')"><span class="row">${I('eye',20,1.8)}<b>Ver mi perfil público</b></span><span class="chev">${I('chev',18)}</span></button>
+  </div></div>
+`},
+solicitud:{g:'Ofrecer', t:'Solicitud', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px">
+  <div class="between"><span class="tag o">Responde en 14 min</span><span class="small">Hace 1 min</span></div>
+  <h1 class="h1">Fuga debajo del lavabo</h1>
+  <div class="card row"><span class="av c4">AG</span><div style="flex:1"><b>Ana G.</b><div class="small">Clienta desde 2026 · ${STAR(12)} 5.0 como clienta</div></div></div>
+  <div class="card stack" style="gap:8px"><div class="row small" style="color:var(--ink2)">${I('cal',18,1.8)}Hoy, 4:00 a 5:00 pm</div><div class="row small" style="color:var(--ink2)">${I('pin',18,1.8)}Roma Norte · 1.2 km (dirección exacta al aceptar)</div><div class="row small" style="color:var(--ink2)">${I('tool',18,1.8)}Visita de diagnóstico · $[PRECIO]</div></div>
+  <div class="card"><p style="font-size:15px;line-height:22px">“Gotea el tubo debajo del lavabo del baño. Ya cerré la llave de paso.”</p><div class="grid3" style="margin-top:12px"><div class="photo">Foto</div><div class="photo">Foto</div></div></div>
+  <div class="btns"><button class="btn ghost" onclick="toast('Solicitud rechazada');go('ofrecer')">Rechazar</button><button class="btn sec" onclick="go('cotizar')">Cotizar</button></div>
+  <button class="btn" onclick="toast('Aceptada. Se agregó a tu agenda');go('agenda')">Aceptar a precio de visita</button></div>`},
+cotizar:{g:'Ofrecer', t:'Enviar cotización', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px">
+  <h1 class="h1">Cotización para Ana G.</h1>
+  <div class="list">${S.cot.map(([a,b])=>`<div class="li" style="cursor:default"><span class="grow">${a}</span><b>${b}</b></div>`).join('')}<button class="li" style="color:var(--accent);font-weight:600" onclick="S.cot.push(['Material adicional','$[PRECIO]']);render()">${I('plus',18)} Agregar concepto</button></div>
+  <div class="card sum"><div><span class="small" style="font-size:15px">Cliente paga</span><span>$[TOTAL]</span></div><div><span class="small" style="font-size:15px">Comisión</span><span>−$[COMISIÓN]</span></div><div><span class="small" style="font-size:15px">Retenciones ISR e IVA</span><span>−$[RET]</span></div><div class="t"><span>Recibirías</span><span style="color:var(--accent)">$[NETO]</span></div></div>
+  <div class="field"><label for="nt">Mensaje para el cliente</label><textarea id="nt" class="input">Incluye material. Garantía de 30 días.</textarea></div>
+  <div class="field"><label for="vg">Válida por</label><select id="vg" class="input"><option>24 horas</option><option>3 días</option><option>7 días</option></select></div>
+  <button class="btn" onclick="toast('Cotización enviada');go('ofrecer')">Enviar cotización</button></div>`},
+agenda:{g:'Ofrecer', t:'Agenda', bar:'back', tabs:'ofrecer', tab:1, title:()=>'Agenda', r:()=>`
+  <div class="week">${[['L',24],['M',25],['M',26],['J',27],['V',28],['S',29],['D',30]].map(([d,n],i)=>`<button class="${S.agendaDia===i?'on':''}" onclick="set('agendaDia',${i})">${d}<b>${n}</b></button>`).join('')}</div>
+  <div class="list">${(S.agendaDia===2?[['12:00 pm','Destape de coladera','Juárez · Pedro L.','Confirmada'],['4:00 pm','Fuga debajo del lavabo','Roma Norte · Ana G.','Nueva'],['6:30 pm','Revisión de tinaco','Roma Sur · Luis M.','Confirmada']]:[['10:00 am','Cambio de calentador','Condesa · Mario T.','Por confirmar']]).map(([h,a,b,st])=>`<button class="li" onclick="go('trabajo')"><b style="width:76px;font-size:14px">${h}</b><span class="grow">${a}<span class="small" style="display:block">${b}</span></span><span class="tag ${st==='Nueva'?'o':st==='Confirmada'?'':'g'}">${st}</span></button>`).join('')}</div>
+  <button class="btn ghost" onclick="toast('Bloquear horario')">${I('cal',18)} Bloquear horario</button>
+`},
+trabajo:{g:'Ofrecer', t:'Trabajo de hoy', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px">
+  <div><span class="tag">Confirmada</span><h1 class="h1" style="margin-top:8px">Destape de coladera</h1><p class="sub">Hoy 12:00 pm · Pedro L.</p></div>
+  <div class="card stack" style="gap:10px"><div class="row small" style="color:var(--ink2)">${I('pin',18,1.8)}Calle [DIRECCIÓN], Juárez</div><div class="btns"><button class="btn sec sm" onclick="toast('Abriendo mapas')">${I('map',18)} Cómo llegar</button><button class="btn sec sm" onclick="go('chat')">${I('chat',18)} Mensaje</button></div></div>
+  <div class="card"><h2 class="h2" style="margin-bottom:12px">Progreso</h2><ol class="tl">${[['Voy en camino',1],['Llegué',2],['Trabajo terminado',0]].map(([a,st],i,arr)=>`<li class="${st===1?'done':st===2?'now':''}"><span class="m"><span class="c">${st===1?I('check',14,3):''}</span>${i<arr.length-1?'<span class="bar"></span>':''}</span><span class="txt"><b style="font-weight:${st?650:400}">${a}</b></span></li>`).join('')}</ol></div>
+  <button class="btn" onclick="toast('Avisamos al cliente que llegaste')">Marcar “Llegué”</button>
+  <button class="btn ghost" onclick="toast('Fotos del trabajo terminado')">${I('camera',18)} Subir fotos del resultado</button>
+  <button class="btn sec" onclick="toast('El cliente debe confirmar para liberar tu pago');go('pagos')">Marcar trabajo terminado</button></div>`},
+pagos:{g:'Ofrecer', t:'Pagos', bar:'back', tabs:'ofrecer', tab:2, title:()=>'Pagos', r:()=>`
+  <div class="two"><div class="a">
+  <div class="balance"><div><div class="k">Disponible para retirar</div><div class="v">$[MONTO]</div></div><div class="between" style="font-size:13px;color:#CCFBF1"><span>Por liberar: $[MONTO]</span><span>CLABE •••• 7731</span></div><button class="btn" style="background:#fff;color:var(--accent)" onclick="toast('Retiro solicitado. Llega en minutos por SPEI')">Retirar a mi cuenta</button></div>
+  <div class="banner">${I('check',20,2.4)}<span><b>RFC registrado.</b> Te retenemos ISR al 2.5% e IVA según tu régimen.</span></div>
+  ${sec('Último servicio', `<div class="card sum"><div><span class="small" style="font-size:15px">Cobro al cliente</span><span>$[MONTO]</span></div><div><span class="small" style="font-size:15px">Comisión de la plataforma</span><span>−$[COMISIÓN]</span></div><div><span class="small" style="font-size:15px">Retención ISR (2.5%)</span><span>−$[ISR]</span></div><div><span class="small" style="font-size:15px">Retención IVA</span><span>−$[IVA]</span></div><div class="t"><span>Recibiste</span><span style="color:var(--accent)">$[NETO]</span></div></div>`)}
+  </div><div class="b">
+  ${sec('Movimientos', `<div class="list">${[['Retiro a tu cuenta','15 nov','−$[MONTO]'],['Revisión de tinaco','14 nov · liberado','$[NETO]'],['Destape de coladera','12 nov · liberado','$[NETO]'],['Cambio de llave','10 nov · liberado','$[NETO]']].map(([a,b,c])=>`<div class="li" style="cursor:default"><span class="grow">${a}<span class="small" style="display:block">${b}</span></span><b>${c}</b></div>`).join('')}</div>`)}
+  <button class="btn ghost" onclick="toast('Descargando constancia (PDF)')">${I('doc',18)} Constancia mensual de retenciones</button>
+  </div></div>
+`},
+'perfil-publico':{g:'Ofrecer', t:'Mi perfil público', bar:'back', tabs:null, r:()=>`
+  <div class="narrow stack" style="gap:16px">
+  <div class="banner o">${I('eye',20)}<span>Así te ven los clientes. Toca “Editar” en cualquier sección.</span></div>
+  <div class="card row" style="gap:14px">${ME('lg')}<div style="flex:1"><b style="font-size:19px">Javier Ramírez</b><div class="small">Plomero · Roma Norte y 5 km</div><span class="tag" style="margin-top:6px">${I('check',12,3)} Verificado</span></div></div>
+  ${sec('Servicios y precios', `<div class="list">${['Visita de diagnóstico','Reparación de fuga','Instalación de calentador'].map(s=>`<div class="li" style="cursor:default"><span class="grow">${s}</span><b>$[PRECIO]</b></div>`).join('')}<button class="li" style="color:var(--accent);font-weight:600" onclick="toast('Agregar servicio')">${I('plus',18)} Agregar servicio</button></div>`, `<button class="btn link" style="width:auto;height:auto" onclick="toast('Editar servicios')">Editar</button>`)}
+  ${sec('Fotos de trabajos', `<div class="grid3"><div class="photo">Foto</div><div class="photo">Foto</div><button class="photo" style="border:2px dashed var(--line2);background:#fff;cursor:pointer" onclick="toast('Agregar foto')">${I('plus',22)}</button></div>`)}
+  ${sec('Horario', `<div class="card small" style="color:var(--ink2);line-height:22px">Lunes a viernes · 9:00 am a 7:00 pm<br>Sábado · 9:00 am a 2:00 pm</div>`, `<button class="btn link" style="width:auto;height:auto" onclick="toast('Editar horario')">Editar</button>`)}
+  </div>`}
+};
+
+/* ---------------- Navegación ---------------- */
+const TABS = {
+  buscar:[['Inicio','home','buscar'],['Reservas','cal','reservas'],['Mensajes','chat','mensajes'],['Cuenta','user','cuenta']],
+  ofrecer:[['Inicio','home','ofrecer'],['Agenda','cal','agenda'],['Pagos','wallet','pagos'],['Cuenta','user','cuenta']]
+};
+function modeSwitch(){
+  return `<div class="mode" role="tablist" aria-label="Modo">
+    <button class="${S.mode==='buscar'?'on b':''}" role="tab" aria-selected="${S.mode==='buscar'}" onclick="setMode('buscar')">${I('search',16,2.2)}Busco</button>
+    <button class="${S.mode==='ofrecer'?'on o':''}" role="tab" aria-selected="${S.mode==='ofrecer'}" onclick="setMode('ofrecer')">${I('tool',16,2.2)}Ofrezco</button></div>`;
+}
+const MAPBTN = () => `<button class="iconbtn ring" aria-label="Mapa de pantallas" title="Mapa de pantallas" onclick="openMap()">${I('grid',20,1.8)}</button>`;
+function topbar(id, sc){
+  if(sc.bar === 'none') return '';
+  if(sc.bar === 'home'){
+    const of = S.mode === 'ofrecer';
+    return `<header class="top"><div class="top-row">
+      ${ME('sm')}<div style="flex:1;min-width:0"><div class="small" style="font-size:13px">Hola, Javier</div><b style="font-size:15px">${of?'Plomería · Verificado':'Roma Norte, CDMX'}</b></div>
+      ${MAPBTN()}<button class="iconbtn ring" aria-label="Notificaciones" onclick="go('notificaciones')">${I('bell',20,1.8)}<span class="dot"></span></button></div>${modeSwitch()}</header>`;
+  }
+  const title = sc.title ? sc.title() : sc.t;
+  return `<header class="top"><div class="top-row">
+    <button class="iconbtn" aria-label="Volver" onclick="back()">${I('back',22)}</button>
+    <div class="top-title">${esc(title)}</div>${MAPBTN()}</div></header>`;
+}
+function sidebar(id, sc){
+  const set = TABS[S.mode === 'ofrecer' && S.ofrecerActivo ? 'ofrecer' : 'buscar'];
+  return `<aside class="side" aria-label="Navegación">
+    <div class="brand"><span class="logo">${I('logo',20,2.4)}</span>[Tu marca]</div>
+    ${modeSwitch()}
+    ${set.map(([n,ic,to])=>`<a class="nav ${tabActive(id,sc,to)?'on':''}" href="#/${to}">${I(ic,20,1.9)}${n}</a>`).join('')}
+    <a class="nav ${id==='notificaciones'?'on':''}" href="#/notificaciones">${I('bell',20,1.9)}Notificaciones</a>
+    <div class="foot">${ME('sm')}<div><b>Javier Ramírez</b><div class="small" style="font-size:12px">${S.ofrecerActivo?'Busca y ofrece':'Buscando servicios'}</div></div></div>
+  </aside>`;
+}
+function tabActive(id, sc, to){
+  const set = sc.tabs === 'auto' ? (S.mode==='ofrecer'&&S.ofrecerActivo?'ofrecer':'buscar') : sc.tabs;
+  if(!set) return false;
+  return TABS[set][sc.tab||0] && TABS[set][sc.tab||0][2] === to;
+}
+function tabbar(id, sc){
+  if(!sc.tabs) return '';
+  const set = sc.tabs === 'auto' ? (S.mode==='ofrecer'&&S.ofrecerActivo?'ofrecer':'buscar') : sc.tabs;
+  return `<nav class="tabbar" aria-label="Principal">${TABS[set].map(([n,ic,to],i)=>`<a class="tab ${i===(sc.tab||0)?'on':''}" href="#/${to}" ${i===(sc.tab||0)?'aria-current="page"':''}>${I(ic,24,1.9)}${n}${to==='mensajes'?'<span class="badge">1</span>':''}</a>`).join('')}</nav>`;
+}
+function curId(){ const h = location.hash.replace(/^#\/?/,''); return SCREENS[h] ? h : 'bienvenida'; }
+function render(){
+  const id = curId(), sc = SCREENS[id];
+  if(sc.g === 'Buscar' && S.mode !== 'buscar'){ S.mode = 'buscar'; persist(); }
+  if(sc.g === 'Ofrecer' && S.ofrecerActivo && S.mode !== 'ofrecer'){ S.mode = 'ofrecer'; persist(); }
+  const auth = sc.bar === 'none';
+  document.getElementById('app').innerHTML = auth
+    ? `<main class="main" style="width:100%">${sc.r()}</main>`
+    : `${sidebar(id, sc)}<div class="main">${topbar(id, sc)}<main class="content ${sc.tabs?'':'noTabs'}">${sc.r()}</main>${tabbar(id, sc)}</div>`;
+  document.title = (sc.title ? (sc.title()||sc.t) : sc.t) + ' · Prototipo';
+  const mb = document.getElementById('mapbtn'); if(mb) mb.style.display = auth ? 'flex' : 'none';
+  if(id === 'chat'){ window.scrollTo(0, document.body.scrollHeight); }
+}
+window.addEventListener('hashchange', () => { go._n++; window.scrollTo(0,0); render(); });
+
+/* ---------------- Interacciones ---------------- */
+function otpNext(el, i){ el.value = el.value.replace(/\D/g,''); if(el.value && i < 5) el.parentNode.children[i+1].focus(); if(i===5 && el.value) setTimeout(()=>go('elegir'), 250); }
+function sendMsg(){ const inp = document.getElementById('cm'); const t = inp.value.trim(); if(!t) return; S.chat.push({me:true,t}); render(); setTimeout(()=>{ S.chat.push({me:false,t:'¡Entendido!'}); if(curId()==='chat') render(); }, 900); }
+
+/* ---------------- Mapa de pantallas ---------------- */
+function openMap(){
+  const groups = {};
+  Object.entries(SCREENS).forEach(([k,v]) => (groups[v.g] = groups[v.g] || []).push([k,v.t]));
+  const cur = curId();
+  document.getElementById('sheet').innerHTML = `<div class="grab"></div><div class="between"><b style="font-size:18px">Mapa de pantallas</b><button class="iconbtn" aria-label="Cerrar" onclick="closeMap()">${I('plus',22,2,'style="transform:rotate(45deg)"')}</button></div>
+    <p class="small">${Object.keys(SCREENS).length} pantallas. Toca una para ir directo.</p>
+    ${Object.entries(groups).map(([g,arr])=>`<h3>${g}</h3><div class="items">${arr.map(([k,t])=>`<button class="${k===cur?'cur':''}" onclick="closeMap();${k==='ofrecer'||SCREENS[k].g==='Ofrecer'?'S.ofrecerActivo=true;S.mode=\'ofrecer\';persist();':''}go('${k}')">${t}</button>`).join('')}</div>`).join('')}
+    <h3>Prototipo</h3><div class="items"><button onclick="try{localStorage.removeItem('proto-state')}catch(e){};location.hash='#/bienvenida';location.reload()">Reiniciar recorrido</button></div>`;
+  document.getElementById('sheet').classList.add('show'); document.getElementById('sheetbg').classList.add('show');
+}
+function closeMap(){ document.getElementById('sheet').classList.remove('show'); document.getElementById('sheetbg').classList.remove('show'); }
+document.body.insertAdjacentHTML('beforeend', `<button id="mapbtn" class="map-btn" onclick="openMap()" aria-label="Mapa de pantallas">${I('grid',16,2)}Pantallas</button>`);
+render();
+</script>
+</body>
+</html>
